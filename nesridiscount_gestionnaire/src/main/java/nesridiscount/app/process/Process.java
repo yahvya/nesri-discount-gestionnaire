@@ -88,13 +88,23 @@ public abstract class Process {
     /**
      * crée et lance les étapes d'un processus
      * @param toExec
+     * @return le processus crée ou null si échec
+     * @throws Exception si une exception est envoyé durant une étape
+     */
+    public static Process execProcess(Class<? extends Process> toExec) throws Exception{
+        return Process.execProcess(toExec,null,null,null);
+    }
+
+    /**
+     * crée et lance les étapes d'un processus
+     * @param toExec
      * @param afterStart à faire après lancement
      * @param afterDo à faire après exécution
      * @param afterEnd à faire après fin
      * @return le processus crée ou null si échec
      * @throws Exception si une exception est envoyé durant une étape
      */
-    public static Process execProcess(Class<Process> toExec,ProcessAction afterStart,ProcessAction afterDo,ProcessAction afterEnd) throws Exception{
+    public static Process execProcess(Class<? extends Process> toExec,ProcessAction afterStart,ProcessAction afterDo,ProcessAction afterEnd) throws Exception{
         Process createdProcess = Process.createProcess(toExec);
 
         if(createdProcess != null){
@@ -117,7 +127,7 @@ public abstract class Process {
      * @param class la class du process
      * @return l'instance du processus ou null
      */
-    private static Process createProcess(Class<Process> toCreate){
+    private static Process createProcess(Class<? extends Process> toCreate){
         try{
             return toCreate.getConstructor().newInstance();
         }
