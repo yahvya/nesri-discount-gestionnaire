@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@500&display=swap');
+
+*{
+    -fx-bg: #232323;
+    -fx-upp-bg: #2C2C2C;
+    -fx-special: #5C38FF;
+    -fx-special-darker: #4a29d9;
+    -fx-text-color: #E3E3E3;
+    -fx-special-2: #2EE5A8;
+    -fx-icon: #474747;
+
+    -fx-text-fill: -fx-text-color;
+    -fx-font-family: "Kanit";
+}
+
+.parent{
+    -fx-text-fill: -fx-text-color;
+    -fx-background-color: -fx-bg;
+    -fx-font-size: 14.5px;
+}
+
+.up{
+    -fx-background-color: -fx-upp-bg;
+}
+
+.icon{
+    -fx-fill: -fx-icon;
+}
+
+.special-bg,.special-color{
+    -fx-background-color: -fx-special;
+}
+
+.special-2-bg,.special-2-color{
+    -fx-background-color: -fx-special-2;
+}
+
+.button{
+    -fx-font-size: 13px;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+.button:hover{
+    -fx-background-color: -fx-special-darker;
+    -fx-cursor: hand;
+}
+
+.text-field {
+    -fx-background-color: -fx-icon,-fx-upp-bg;
+}
