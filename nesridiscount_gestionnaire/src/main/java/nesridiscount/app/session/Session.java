@@ -3,14 +3,20 @@ package nesridiscount.app.session;
 import java.io.File;
 import java.net.URI;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.Date;
 import java.util.Map;
 
 import org.json.simple.JSONObject;
 
 import nesridiscount.App;
 import nesridiscount.app.util.JsonWriter;
+import nesridiscount.models.model.Model;
+import nesridiscount.models.model.UsersModel;
+import nesridiscount.models.util.Condition;
+import nesridiscount.models.util.Condition.Separator;
 
 /**
  * session utilisateur
@@ -25,6 +31,7 @@ public class Session {
 
     private static String username;
     private static String password;
+    private static String loginTime;
 
     private static Role role;
 
@@ -47,11 +54,14 @@ public class Session {
      * sauvegarde la session
      */
     public static void save(){
+        Timestamp now = Timestamp.from(Instant.now() );
+
+        Session.loginTime = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date(now.getTime() ) );
+
         JSONObject saveObject = new JSONObject(Map.of(
             "username",Session.username,
             "password",Session.password,
-            "role",Session.role.roleId,
-            "loginTime", Timestamp.from(Instant.now() ).toString()
+            "loginTime", now.toString()
         ) );
 
         try{
@@ -83,12 +93,21 @@ public class Session {
                 // création de la session
                 Session.username = (String) sessionObject.get("username");
                 Session.password = (String) sessionObject.get("password");
-                Session.role = Role.getById(((Long) sessionObject.get("role") ).intValue() );
+                Session.loginTime = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date(loginTime.getTime() ) );
 
-                return true;
+                Model foundedModel = Model.findOneBy(UsersModel.class,new Condition[]{
+                    new Condition<>("username",Session.username,Separator.NULL)
+                });
+
+                if(foundedModel != null){
+                    Session.role = Role.getById(((UsersModel) foundedModel).role );
+
+                    return true;
+                }
+                else new File(new URI(link) ).delete();
             }
         }
-        catch(Exception e){System.out.println(e.getMessage());}
+        catch(Exception e){}
 
         return false;
     }
@@ -107,6 +126,14 @@ public class Session {
      */
     public static String getPassword(){
         return Session.password;
+    }
+
+    /**
+     * 
+     * @return l'heure de la dernière connexion
+     */
+    public static String getLoginTime(){
+        return Session.loginTime;
     }
 
     /**

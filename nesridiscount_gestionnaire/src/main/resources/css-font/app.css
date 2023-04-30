@@ -3,11 +3,12 @@
 *{
     -fx-bg: #232323;
     -fx-upp-bg: #2C2C2C;
-    -fx-special: #5C38FF;
+    -fx-special: #6545f6;
     -fx-special-darker: #4a29d9;
     -fx-text-color: #E3E3E3;
     -fx-special-2: #2EE5A8;
-    -fx-icon: #474747;
+    -fx-icon: #615f5f;
+    -fx-border: #424242;
 
     -fx-text-fill: -fx-text-color;
     -fx-font-family: "Kanit";
@@ -53,7 +54,7 @@
 }
 
 .text-field {
-    -fx-background-color: -fx-icon,-fx-upp-bg;
+    -fx-background-color: -fx-border,-fx-upp-bg;
 }
 
 .check-box .box{
