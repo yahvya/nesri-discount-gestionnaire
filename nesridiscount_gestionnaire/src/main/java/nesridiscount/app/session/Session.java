@@ -83,7 +83,7 @@ public class Session {
                 // création de la session
                 Session.username = (String) sessionObject.get("username");
                 Session.password = (String) sessionObject.get("password");
-                Session.role = Role.getById((Integer) sessionObject.get("role") );
+                Session.role = Role.getById(((Long) sessionObject.get("role") ).intValue() );
 
                 return true;
             }
