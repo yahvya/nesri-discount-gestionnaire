@@ -14,12 +14,12 @@
          <content>
             <VBox prefHeight="200.0" prefWidth="100.0" styleClass="parent">
                <children>
-                  <HBox alignment="CENTER" prefHeight="45.0" prefWidth="599.0">
+                  <HBox alignment="CENTER" prefHeight="45.0" prefWidth="599.0" styleClass="search-container">
                      <children>
                         <HBox alignment="CENTER" prefHeight="46.0" prefWidth="353.0" spacing="15.0">
                            <children>
-                              <FontAwesomeIconView />
-                              <TextField prefHeight="32.0" prefWidth="300.0" promptText="Trouver des pièces" styleClass="search-input" />
+                              <FontAwesomeIconView styleClass="icon" text="" />
+                              <TextField focusTraversable="false" prefHeight="32.0" prefWidth="300.0" promptText="Appuyez pour trouver des pièces" styleClass="search-input" />
                            </children>
                         </HBox>
                      </children>

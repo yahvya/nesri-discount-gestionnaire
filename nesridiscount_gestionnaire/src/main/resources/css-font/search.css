@@ -1,3 +1,11 @@
 .search-input{
-    -fx-background-color: red;
+    -fx-background-color: transparent;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-border-color: -fx-border;
+    -fx-padding: 7px;
+}
+
+.search-container{
+    -fx-padding: 20px;
 }
