@@ -9,7 +9,7 @@ public abstract class Controller {
     /**
      * affiche la page d'accueil
      */
-    public void switchToHomePage(){
-        App.switchToScene("home");
+    public static void switchToAppPage(){
+        App.switchToScene("app");
     }
 }

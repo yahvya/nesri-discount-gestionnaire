@@ -14,9 +14,10 @@ public class LoginManager {
      * tente de créer la session utilisateur à partir des données envoyés
      * @param username
      * @param password
+     * @param keepAlive si la session doit être gardé
      * @return si la session est crée
      */
-    public boolean crateSessionFrom(String username,String password){
+    public boolean crateSessionFrom(String username,String password,boolean keepAlive){
         Model foundedModel = Model.findOneBy(UsersModel.class,new Condition[]{
             new Condition<String>("username",username,Separator.NULL)
         });
@@ -25,7 +26,7 @@ public class LoginManager {
             UsersModel userModel = (UsersModel) foundedModel;
 
             if(userModel.checkPassword(password) ){
-                Session.initSession(userModel.username,userModel.password,userModel.role);
+                Session.initSession(userModel.username,userModel.password,userModel.role,keepAlive);
 
                 return true;
             }

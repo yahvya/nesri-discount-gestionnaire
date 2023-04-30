@@ -19,7 +19,7 @@
     -fx-font-size: 14.5px;
 }
 
-.up{
+.up,.check-box .box{
     -fx-background-color: -fx-upp-bg;
 }
 
@@ -27,7 +27,7 @@
     -fx-fill: -fx-icon;
 }
 
-.special-bg,.special-color{
+.special-bg,.special-color,.check-box:selected .mark{
     -fx-background-color: -fx-special;
 }
 
@@ -49,4 +49,9 @@
 
 .text-field {
     -fx-background-color: -fx-icon,-fx-upp-bg;
+}
+
+.check-box .box{
+    -fx-border-color:-fx-upp-bg;
+    -fx-border-radius: 3px; 
 }

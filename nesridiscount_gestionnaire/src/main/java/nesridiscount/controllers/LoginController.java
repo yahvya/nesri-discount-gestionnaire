@@ -2,6 +2,7 @@ package nesridiscount.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -25,6 +26,9 @@ public class LoginController extends Controller{
     @FXML
     private Label errorMessage;
 
+    @FXML
+    private CheckBox stayLogged;
+
     private LoginManager loginManager;
 
     @FXML
@@ -37,10 +41,15 @@ public class LoginController extends Controller{
         String username = this.username.getText();
         String password = this.password.getText();
 
-        if(this.loginManager.crateSessionFrom(username, password) )
-            this.switchToHomePage();
-        else
-            errorMessage.setText("Erreur - Compte non trouvé");
+        if(this.loginManager.crateSessionFrom(username, password,this.stayLogged.isSelected() ) ){
+            Stage window = App.getStage();
+
+            window.centerOnScreen();
+            window.initStyle(StageStyle.DECORATED);
+
+            Controller.switchToAppPage();
+        }
+        else errorMessage.setText("Erreur - Compte non trouvé");
     }
 
     @FXML

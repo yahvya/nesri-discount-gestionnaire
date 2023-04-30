@@ -1,9 +1,28 @@
 package nesridiscount.app.session;
 
+import java.io.File;
+import java.net.URI;
+import java.sql.Timestamp;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.Map;
+
+import org.json.simple.JSONObject;
+
+import nesridiscount.App;
+import nesridiscount.app.util.JsonWriter;
+
 /**
  * session utilisateur
  */
 public class Session {
+    private static String SESSION_SAVE_FILE = "session.json";
+
+    /**
+     * une semaine en minutes
+     */
+    private static int ALLOWED_TIME = 60 * 24 * 7;
+
     private static String username;
     private static String password;
 
@@ -13,19 +32,72 @@ public class Session {
      * initialise la session
      * @param username
      * @param password
+     * @param keepAlive si la session doit être gardé
      * @param role
      */
-    public static void initSession(String username,String password,int role){
+    public static void initSession(String username,String password,int role,boolean keepAlive){
         Session.username = username;
         Session.password = password;
         Session.role = Role.getById(role);
+
+        if(keepAlive) Session.save();
+    }
+
+    /**
+     * sauvegarde la session
+     */
+    public static void save(){
+        JSONObject saveObject = new JSONObject(Map.of(
+            "username",Session.username,
+            "password",Session.password,
+            "role",Session.role.roleId,
+            "loginTime", Timestamp.from(Instant.now() ).toString()
+        ) );
+
+        try{
+            // sauvegarde du fichier
+            JsonWriter.writeObject(saveObject,App.loadResource("/documents/").toURI().toString() + Session.SESSION_SAVE_FILE);
+        }
+        catch(Exception e){}
+    }
+
+    /**
+     * tente de charger la session à partir du fichier de session
+     * @return si la session est chargé
+     */
+    public static boolean loadSession(){
+        try{
+            String link = App.loadResource("/documents/" + Session.SESSION_SAVE_FILE).toURI().toString();
+
+            JSONObject sessionObject = JsonWriter.readObject(link);
+            
+            Timestamp loginTime = Timestamp.valueOf((String) sessionObject.get("loginTime") );
+
+            Timestamp now = Timestamp.from(Instant.now() );
+
+            // vérifie si la limite est passé
+            if(loginTime.before(now) && ChronoUnit.MINUTES.between(loginTime.toLocalDateTime(),now.toLocalDateTime() ) >= Session.ALLOWED_TIME){
+                new File(new URI(link) ).delete();
+            }
+            else{
+                // création de la session
+                Session.username = (String) sessionObject.get("username");
+                Session.password = (String) sessionObject.get("password");
+                Session.role = Role.getById((Integer) sessionObject.get("role") );
+
+                return true;
+            }
+        }
+        catch(Exception e){System.out.println(e.getMessage());}
+
+        return false;
     }
 
     /**
      * 
      * @return le nom d'utilisateur
      */
-    public String getUsername(){
+    public static String getUsername(){
         return Session.username;
     }
 
@@ -33,7 +105,7 @@ public class Session {
      * 
      * @return le mot de passe
      */
-    public String getPassword(){
+    public static String getPassword(){
         return Session.password;
     }
 
@@ -41,7 +113,7 @@ public class Session {
      * 
      * @return le role
      */
-    public Role getRole(){
+    public static Role getRole(){
         return Session.role;
     }
 

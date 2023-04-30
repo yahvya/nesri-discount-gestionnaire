@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import nesridiscount.app.session.Session;
 
 /**
  * gestionnaire de pièces détachés nesri discount
@@ -33,7 +34,7 @@ public class App extends Application {
         App.savedPages = new HashMap<>();
 
         // chargement de la page d'accueil
-        App.scene = new Scene(App.loadFXML("login") );
+        App.scene = new Scene(App.loadFXML(!Session.loadSession() ? "login" : "app") );
 
         // configuration de la fenêtre
         primaryStage.setTitle("Nesri discount - Gestionnaire");
