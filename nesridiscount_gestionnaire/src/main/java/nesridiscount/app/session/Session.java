@@ -46,6 +46,10 @@ public class Session {
         Session.username = username;
         Session.password = password;
         Session.role = Role.getById(role);
+        
+        Timestamp now = Timestamp.from(Instant.now() );
+
+        Session.loginTime = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date(now.getTime() ) );
 
         if(keepAlive) Session.save();
     }
@@ -55,8 +59,6 @@ public class Session {
      */
     public static void save(){
         Timestamp now = Timestamp.from(Instant.now() );
-
-        Session.loginTime = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date(now.getTime() ) );
 
         JSONObject saveObject = new JSONObject(Map.of(
             "username",Session.username,
