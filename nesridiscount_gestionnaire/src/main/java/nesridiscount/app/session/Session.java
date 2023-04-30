@@ -79,9 +79,7 @@ public class Session {
      */
     public static boolean loadSession(){
         try{
-            String link = App.loadResource("/documents/" + Session.SESSION_SAVE_FILE).toURI().toString();
-
-            JSONObject sessionObject = JsonWriter.readObject(link);
+            JSONObject sessionObject = JsonWriter.readObject(App.loadResource("/documents/" + Session.SESSION_SAVE_FILE).toURI().toString() );
             
             Timestamp loginTime = Timestamp.valueOf((String) sessionObject.get("loginTime") );
 
@@ -89,7 +87,9 @@ public class Session {
 
             // vérifie si la limite est passé
             if(loginTime.before(now) && ChronoUnit.MINUTES.between(loginTime.toLocalDateTime(),now.toLocalDateTime() ) >= Session.ALLOWED_TIME){
-                new File(new URI(link) ).delete();
+                Session.loggout();
+
+                return false;
             }
             else{
                 // création de la session
@@ -106,12 +106,25 @@ public class Session {
 
                     return true;
                 }
-                else new File(new URI(link) ).delete();
+                else Session.loggout();
             }
         }
         catch(Exception e){}
 
         return false;
+    }
+
+    /**
+     * déconnecte l'utilisateur, supprime la session sauvegardé
+     * @return si la déconnexion a réussi
+     */
+    public static boolean loggout(){
+        try{
+            return new File(new URI(App.loadResource("/documents/" + Session.SESSION_SAVE_FILE).toURI().toString() ) ).delete();
+        }
+        catch(Exception e){
+            return false;
+        }
     }
 
     /**

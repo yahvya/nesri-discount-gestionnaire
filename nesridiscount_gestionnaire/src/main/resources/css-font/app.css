@@ -67,3 +67,12 @@
     -fx-background-color: -fx-special;
     -fx-margin: 2px;
 }
+
+.session-data{
+    -fx-padding: 5px;
+    -fx-background-color: -fx-special;
+    -fx-border-radius: 3px;
+    -fx-background-radius: 3px;
+    -fx-font-weight: bold;
+    -fx-font-size: 12.5px;
+}

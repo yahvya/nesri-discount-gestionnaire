@@ -1,5 +1,8 @@
 package nesridiscount.controllers;
 
+import javafx.fxml.FXML;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import nesridiscount.App;
 
@@ -7,6 +10,8 @@ import nesridiscount.App;
  * parent des controllers
  */
 public abstract class Controller {
+    private static BorderPane pane;
+
     /**
      * affiche la page d'accueil
      */
@@ -31,5 +36,9 @@ public abstract class Controller {
         App.switchToScene("app");
 
         window.show();
+    }
+    
+    public static void setPane(BorderPane pane){
+        Controller.pane = pane;
     }
 }

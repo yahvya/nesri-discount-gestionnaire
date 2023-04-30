@@ -88,8 +88,9 @@ public class App extends Application {
      * affiche la page donnée
      * @param fxmlFilename
      * @param saveScene défini si la scène doit être re utilisé
+     * @return Parent le parent sélectionné
      */
-    public static void switchToScene(String fxmlFilename,boolean saveScene){
+    public static Parent switchToScene(String fxmlFilename,boolean saveScene){
         Parent fxml = App.savedPages.get(fxmlFilename);
 
         if(fxml == null) fxml = App.loadFXML(fxmlFilename);
@@ -97,13 +98,15 @@ public class App extends Application {
         if(saveScene) App.savedPages.put(fxmlFilename,fxml);
 
         if(fxml != null) App.scene.setRoot(fxml);
+
+        return fxml;
     }
 
     /**
      * @alias false à switchToScene
      */
-    public static void switchToScene(String fxmlFilename){
-        App.switchToScene(fxmlFilename,false);
+    public static Parent switchToScene(String fxmlFilename){
+        return App.switchToScene(fxmlFilename,false);
     }
 
     /**

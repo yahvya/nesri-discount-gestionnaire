@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="436.0" prefWidth="733.0" styleClass="parent" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nesridiscount.controllers.AppController">
+<BorderPane fx:id="parent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="436.0" prefWidth="733.0" styleClass="parent" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nesridiscount.controllers.AppController">
    <stylesheets>
       <URL value="@../css-font/app.css" />
       <URL value="@../css-font/home.css" />
@@ -32,12 +32,12 @@
                   <Insets top="10.0" />
                </VBox.margin>
             </ImageView>
-            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="71.0" spacing="25.0">
+            <VBox fx:id="navbar" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="71.0" spacing="25.0">
                <VBox.margin>
                   <Insets top="50.0" />
                </VBox.margin>
                <children>
-                  <Label alignment="CENTER" prefHeight="22.0" prefWidth="22.0">
+                  <Label fx:id="searchPiecesLabel" alignment="CENTER" onMouseClicked="#showSearchPieces" prefHeight="22.0" prefWidth="22.0">
                      <graphic>
                         <FontAwesomeIconView fx:id="search" size="17" styleClass="icon" text="" />
                      </graphic>
@@ -45,7 +45,7 @@
                         <Tooltip text="Rechercher des pièces " />
                      </tooltip>
                   </Label>
-                  <Label fx:id="addPieces" alignment="CENTER" prefHeight="26.0" prefWidth="38.0">
+                  <Label fx:id="addPiecesLabel" alignment="CENTER" onMouseClicked="#showAddPieces" prefHeight="26.0" prefWidth="38.0">
                      <graphic>
                         <FontAwesomeIconView size="17" styleClass="icon" text="" />
                      </graphic>
@@ -53,20 +53,36 @@
                         <Tooltip text="Ajouter une / des pièces" />
                      </tooltip>
                   </Label>
-                  <Label fx:id="fileParser" alignment="CENTER" prefHeight="26.0" prefWidth="38.0">
+                  <Label alignment="CENTER" onMouseClicked="#showFileParser" prefHeight="26.0" prefWidth="38.0">
                      <graphic>
                         <FontAwesomeIconView onMouseClicked="#switchToParser" size="17" styleClass="icon" text="" />
                      </graphic>
                      <tooltip>
-                        <Tooltip text="Traiter des fiches prix" />
+                        <Tooltip text="Traiter les fiches de prix" />
                      </tooltip>
                   </Label>
-                  <Label fx:id="parameters" alignment="CENTER" prefHeight="22.0" prefWidth="37.0">
+                  <Label fx:id="parametersLabel" alignment="CENTER" onMouseClicked="#showParameters" prefHeight="22.0" prefWidth="37.0">
                      <graphic>
                         <FontAwesomeIconView size="17" styleClass="icon" text="" />
                      </graphic>
                      <tooltip>
                         <Tooltip text="Gérer le logiciel et les participants" />
+                     </tooltip>
+                  </Label>
+                  <Label onMouseClicked="#showHelp">
+                     <graphic>
+                        <FontAwesomeIconView size="17" styleClass="icon" text="" />
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Aide sur l'application" />
+                     </tooltip>
+                  </Label>
+                  <Label onMouseClicked="#loggout">
+                     <graphic>
+                        <FontAwesomeIconView size="17" styleClass="icon" text="" />
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Déconnexion" />
                      </tooltip>
                   </Label>
                </children>
@@ -89,7 +105,7 @@
          <bottom>
             <VBox alignment="CENTER_RIGHT" prefHeight="41.0" prefWidth="688.0" style="-fx-padding: 10px;" BorderPane.alignment="CENTER">
                <children>
-                  <Label fx:id="username" style="-fx-font-weight: bold; -fx-font-size: 12.5px;" text="Utilisateur">
+                  <Label fx:id="username" styleClass="session-data" text="Utilisateur">
                      <padding>
                         <Insets right="10.0" />
                      </padding>
