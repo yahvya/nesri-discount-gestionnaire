@@ -7,15 +7,14 @@ import javafx.scene.input.MouseEvent;
 import nesridiscount.app.session.Session;
 
 public class AppController {
+    @FXML
+    private Label addPieces;
 
     @FXML
-    private FontAwesomeIconView addPieces;
+    private Label fileParser;
 
     @FXML
-    private FontAwesomeIconView fileParser;
-
-    @FXML
-    private FontAwesomeIconView parameters;
+    private Label parameters;
 
     @FXML
     private FontAwesomeIconView search;

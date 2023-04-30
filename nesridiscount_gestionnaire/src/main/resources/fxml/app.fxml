@@ -6,38 +6,69 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="parent" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nesridiscount.controllers.AppController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="436.0" prefWidth="733.0" styleClass="parent" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nesridiscount.controllers.AppController">
    <stylesheets>
       <URL value="@../css-font/app.css" />
       <URL value="@../css-font/home.css" />
    </stylesheets>
    <left>
-      <VBox prefHeight="400.0" prefWidth="60.0" style="-fx-padding: 6px;" BorderPane.alignment="CENTER">
+      <VBox prefHeight="436.0" prefWidth="51.0" style="-fx-padding: 6px;" BorderPane.alignment="CENTER">
          <styleClass>
             <String fx:value="bordered" />
             <String fx:value="up" />
          </styleClass>
          <children>
-            <ImageView fitHeight="23.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="17.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../icons/favicon.png" />
                </image>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
             </ImageView>
-            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="71.0" spacing="35.0">
+            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="71.0" spacing="25.0">
                <VBox.margin>
                   <Insets top="50.0" />
                </VBox.margin>
                <children>
-                  <FontAwesomeIconView fx:id="search" size="17" styleClass="icon" text="" />
-                  <FontAwesomeIconView fx:id="addPieces" size="17" styleClass="icon" text="" />
-                  <FontAwesomeIconView fx:id="fileParser" onMouseClicked="#switchToParser" size="17" styleClass="icon" text="" />
-                  <FontAwesomeIconView fx:id="parameters" size="17" styleClass="icon" text="" />
+                  <Label alignment="CENTER" prefHeight="22.0" prefWidth="22.0">
+                     <graphic>
+                        <FontAwesomeIconView fx:id="search" size="17" styleClass="icon" text="" />
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Rechercher des pièces " />
+                     </tooltip>
+                  </Label>
+                  <Label fx:id="addPieces" alignment="CENTER" prefHeight="26.0" prefWidth="38.0">
+                     <graphic>
+                        <FontAwesomeIconView size="17" styleClass="icon" text="" />
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Ajouter une / des pièces" />
+                     </tooltip>
+                  </Label>
+                  <Label fx:id="fileParser" alignment="CENTER" prefHeight="26.0" prefWidth="38.0">
+                     <graphic>
+                        <FontAwesomeIconView onMouseClicked="#switchToParser" size="17" styleClass="icon" text="" />
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Traiter des fiches prix" />
+                     </tooltip>
+                  </Label>
+                  <Label fx:id="parameters" alignment="CENTER" prefHeight="22.0" prefWidth="37.0">
+                     <graphic>
+                        <FontAwesomeIconView size="17" styleClass="icon" text="" />
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Gérer le logiciel et les participants" />
+                     </tooltip>
+                  </Label>
                </children>
             </VBox>
          </children>
@@ -48,12 +79,15 @@
          <center>
             <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: -fx-bg;" BorderPane.alignment="CENTER">
                <content>
-                  <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: -fx-bg;" />
+                  <VBox prefHeight="394.0" prefWidth="668.0" style="-fx-background-color: -fx-bg;" />
                </content>
+               <BorderPane.margin>
+                  <Insets left="5.0" />
+               </BorderPane.margin>
             </ScrollPane>
          </center>
          <bottom>
-            <VBox alignment="CENTER_RIGHT" prefWidth="535.0" style="-fx-padding: 10px;" BorderPane.alignment="CENTER">
+            <VBox alignment="CENTER_RIGHT" prefHeight="41.0" prefWidth="688.0" style="-fx-padding: 10px;" BorderPane.alignment="CENTER">
                <children>
                   <Label fx:id="username" style="-fx-font-weight: bold; -fx-font-size: 12.5px;" text="Utilisateur">
                      <padding>

@@ -34,13 +34,15 @@ public class App extends Application {
         App.stage = primaryStage;
         App.savedPages = new HashMap<>();
 
+        Parent parent = App.loadFXML("login");
+
         // chargement de la page d'accueil
-        App.scene = new Scene(App.loadFXML("login") );
+        App.scene = new Scene(parent);
 
         // configuration de la fenêtre
         App.setWindowConfig();
 
-        if(Session.loadSession() ) Controller.switchToAppPage(true);
+        if(Session.loadSession() )  Controller.switchToAppPage(true);
     }   
 
     /**

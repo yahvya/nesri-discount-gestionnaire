@@ -26,7 +26,10 @@ public abstract class Controller {
         catch(Exception e){}
 
         window.setMaximized(true);
+        window.hide();
 
         App.switchToScene("app");
+
+        window.show();
     }
 }

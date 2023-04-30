@@ -61,3 +61,9 @@
     -fx-border-color:-fx-upp-bg;
     -fx-border-radius: 3px; 
 }
+
+.tooltip {
+    -fx-show-delay: 10ms !important;
+    -fx-background-color: -fx-special;
+    -fx-margin: 2px;
+}
