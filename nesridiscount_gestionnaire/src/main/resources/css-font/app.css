@@ -27,6 +27,11 @@
     -fx-fill: -fx-icon;
 }
 
+.icon:hover{
+    -fx-fill: -fx-special;
+    -fx-cursor: hand;
+}
+
 .special-bg,.special-color,.check-box:selected .mark{
     -fx-background-color: -fx-special;
 }

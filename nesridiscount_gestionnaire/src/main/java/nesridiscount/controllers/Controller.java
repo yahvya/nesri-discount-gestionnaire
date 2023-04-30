@@ -1,5 +1,6 @@
 package nesridiscount.controllers;
 
+import javafx.stage.Stage;
 import nesridiscount.App;
 
 /**
@@ -9,7 +10,23 @@ public abstract class Controller {
     /**
      * affiche la page d'accueil
      */
-    public static void switchToAppPage(){
+    public static void switchToAppPage(boolean resetPage){
+        Stage window = App.getStage();
+
+        try{
+            window.close();
+
+            window = new Stage();
+
+            App.setStage(window);
+            App.setWindowConfig();
+
+            window.setMaximized(true);
+        }
+        catch(Exception e){}
+
+        window.setMaximized(true);
+
         App.switchToScene("app");
     }
 }

@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import nesridiscount.app.session.Session;
+import nesridiscount.controllers.Controller;
 
 /**
  * gestionnaire de pièces détachés nesri discount
@@ -34,13 +35,22 @@ public class App extends Application {
         App.savedPages = new HashMap<>();
 
         // chargement de la page d'accueil
-        App.scene = new Scene(App.loadFXML(!Session.loadSession() ? "login" : "app") );
+        App.scene = new Scene(App.loadFXML("login") );
 
         // configuration de la fenêtre
-        primaryStage.setTitle("Nesri discount - Gestionnaire");
-        primaryStage.getIcons().add(new Image(App.loadResource("/icons/favicon.png").toString() ) );
-        primaryStage.setScene(App.scene);
-        primaryStage.show();
+        App.setWindowConfig();
+
+        if(Session.loadSession() ) Controller.switchToAppPage(true);
+    }   
+
+    /**
+     * configure la fenêtre ajouté
+     */
+    public static void setWindowConfig(){
+        App.stage.setTitle("Nesri discount - Gestionnaire");
+        App.stage.getIcons().add(new Image(App.loadResource("/icons/favicon.png").toString() ) );
+        App.stage.setScene(App.scene);
+        App.stage.show();
     }
 
     /**
@@ -92,6 +102,14 @@ public class App extends Application {
      */
     public static void switchToScene(String fxmlFilename){
         App.switchToScene(fxmlFilename,false);
+    }
+
+    /**
+     * affecte le stage
+     * @param stage
+     */
+    public static void setStage(Stage stage){
+        App.stage = stage;
     }
 
     public static Stage getStage(){
