@@ -168,7 +168,7 @@ public abstract class Model {
      * @throws Exception
      */
     private static String getDatabaseUrl() throws Exception{
-        URL url = App.loadResource("/database/db.sqlite");
+        URL url = App.loadResource("/documents/db.sqlite");
 
         if(url == null) throw new Exception();
 
