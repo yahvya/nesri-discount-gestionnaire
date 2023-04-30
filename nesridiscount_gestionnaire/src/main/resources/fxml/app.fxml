@@ -66,7 +66,7 @@
                         <FontAwesomeIconView size="17" styleClass="icon" text="" />
                      </graphic>
                      <tooltip>
-                        <Tooltip text="Gérer le logiciel et les participants" />
+                        <Tooltip text="Paramètres de l'application et du compte" />
                      </tooltip>
                   </Label>
                   <Label onMouseClicked="#showHelp">
@@ -93,7 +93,7 @@
    <center>
       <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <center>
-            <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: -fx-bg;" BorderPane.alignment="CENTER">
+            <ScrollPane fx:id="toReplace" fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: -fx-bg;" BorderPane.alignment="CENTER">
                <content>
                   <VBox prefHeight="394.0" prefWidth="668.0" style="-fx-background-color: -fx-bg;" />
                </content>

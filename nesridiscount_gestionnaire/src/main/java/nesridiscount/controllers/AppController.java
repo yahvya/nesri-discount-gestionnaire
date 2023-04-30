@@ -5,15 +5,15 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import nesridiscount.App;
 import nesridiscount.app.session.Session;
 
 public class AppController {
     @FXML
-    private BorderPane pane;
+    private ScrollPane toReplace;
 
     @FXML
     private Label addPiecesLabel;
@@ -76,6 +76,10 @@ public class AppController {
 
         ObservableList<Node> children = this.navbar.getChildren();
 
+        // section à affiché
+        String toShow = "search";
+        boolean keepPage = true;
+
         // suppression des élements de navigation en fonction du role
         switch(Session.getRole() ){
             case Special: 
@@ -88,11 +92,15 @@ public class AppController {
                     this.addPiecesLabel,
                     this.searchPiecesLabel
                 );
+
+                toShow = "parser";
+                keepPage = false;
             ; break;
             
             default:;
         }
 
-        Controller.setPane(this.pane);
+        Controller.setPane(this.toReplace);
+        Controller.switchToPage(toShow,keepPage);
     }
 }
