@@ -10,6 +10,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import nesridiscount.App;
 import nesridiscount.app.session.Session;
+import nesridiscount.app.session.Session.Role;
 
 public class AppController extends Controller{
     @FXML
@@ -81,23 +82,14 @@ public class AppController extends Controller{
         boolean keepPage = true;
 
         // suppression des élements de navigation en fonction du role
-        switch(Session.getRole() ){
-            case Special: 
-                children.remove(this.parametersLabel);
-            ; break;
+        if(Session.getRole() == Role.Inter){
+            children.removeAll(
+                this.addPiecesLabel,
+                this.searchPiecesLabel
+            );
 
-            case Inter:
-                children.removeAll(
-                    this.parametersLabel,
-                    this.addPiecesLabel,
-                    this.searchPiecesLabel
-                );
-
-                toShow = "parser";
-                keepPage = false;
-            ; break;
-            
-            default:;
+            toShow = "parser";
+            keepPage = false;
         }
 
         Controller.setPane(this.toReplace);
