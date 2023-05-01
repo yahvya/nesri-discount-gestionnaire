@@ -7,6 +7,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.scene.control.TableView;
 import nesridiscount.App;
 import nesridiscount.models.model.Model;
@@ -42,16 +43,6 @@ public class SearchPiecesProcess extends Process{
         });
 
         this.initFilters();
-    }
-
-    /**
-     * vide les résultats précédents
-     */
-    @Override
-    public Process startProcess() throws Exception {
-        this.resultArray.getItems().clear();
-
-        return this;
     }
 
     /**
@@ -114,7 +105,10 @@ public class SearchPiecesProcess extends Process{
      * affiche les résultats
      */
     public Process endProcess(ArrayList<PiecesModel> results) throws Exception {
-        this.resultArray.getItems().addAll(results);
+        ObservableList<PiecesModel> items = this.resultArray.getItems();
+
+        items.clear();
+        items.addAll(results);
         
         return super.endProcess();
     }
@@ -126,7 +120,6 @@ public class SearchPiecesProcess extends Process{
      * @throws Exception
      */
     public Process execEntireProcess(String search) throws Exception {
-        this.startProcess();
         this.doProcess(search);
         
         return this;
