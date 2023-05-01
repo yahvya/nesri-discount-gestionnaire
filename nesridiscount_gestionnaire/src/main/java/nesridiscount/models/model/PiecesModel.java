@@ -69,4 +69,29 @@ public class PiecesModel extends Model{
     public String getLocation() {
         return this.location;
     }
+
+    @Override
+    public String toString(){
+        return String.join(",",
+            Integer.toString(this.id),
+            Integer.toString(this.quantity),
+            this.pieceName,
+            this.internalRef,
+            this.externalRef,
+            this.enterpriseName,
+            this.location
+        );
+    }
+
+    public static String toStringHeader(){
+        return String.join(",",
+            "Id",
+            "Quantité",
+            "Nom de la pièce",
+            "Référence interne",
+            "Référence fabriquant",
+            "Nom fabriquant",
+            "Emplacement"
+        );
+    }
 }
