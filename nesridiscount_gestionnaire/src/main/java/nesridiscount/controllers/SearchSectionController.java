@@ -1,5 +1,6 @@
 package nesridiscount.controllers;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
@@ -14,6 +15,7 @@ import javafx.scene.input.MouseEvent;
 import nesridiscount.app.process.SearchPiecesProcess;
 import nesridiscount.app.process.SearchPiecesProcess.PieceFilter;
 import nesridiscount.app.ui_util.UiAlert;
+import nesridiscount.app.util.FileExporter;
 import nesridiscount.models.model.PiecesModel;
 
 public class SearchSectionController {
@@ -67,12 +69,26 @@ public class SearchSectionController {
 
     @FXML
     void exportResults(MouseEvent e){
+        ObservableList<PiecesModel> items = this.resultArray.getItems();
+        
         // vérification d'existance de résultats
-        if(this.resultArray.getItems().size() == 0){
+        if(items.size() == 0){
             UiAlert.newAlert(AlertType.INFORMATION,"Echec d'export","Il n'y a aucun résultat à exporter").show();
 
             return;
         }
+
+        // création du contenu csv
+        String csvData = PiecesModel.toStringHeader() + "\n";
+
+        for(PiecesModel pieceModel : items) csvData += pieceModel.toString() + "\n";
+        
+        UiAlert.newAlert(
+            AlertType.INFORMATION,
+            "Export des résultats",
+            FileExporter.export(csvData,".csv") ? 
+                "Votre fichier a bien été sauvegardé" : 
+                "Une erreur s'est produite lors de la sauvegarde de votre fichier veuillez retenter ou relancer l'application !").show();
     }
 
     @FXML

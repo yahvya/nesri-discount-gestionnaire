@@ -5,6 +5,7 @@ module nesridiscount {
     requires spring.security.crypto;
     requires de.jensd.fx.glyphs.fontawesome;
     requires json.simple;
+    requires java.desktop;
 
     opens nesridiscount.models.model to javafx.base;
     opens nesridiscount.controllers to javafx.fxml;
