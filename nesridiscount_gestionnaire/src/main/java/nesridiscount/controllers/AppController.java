@@ -11,7 +11,7 @@ import javafx.scene.layout.VBox;
 import nesridiscount.App;
 import nesridiscount.app.session.Session;
 
-public class AppController {
+public class AppController extends Controller{
     @FXML
     private ScrollPane toReplace;
 
@@ -47,7 +47,7 @@ public class AppController {
 
     @FXML
     void showFileParser(MouseEvent event) {
-
+        Controller.switchToPage("parser");
     }
 
     @FXML
@@ -62,12 +62,12 @@ public class AppController {
 
     @FXML
     void showSearchPieces(MouseEvent event) {
-
+        Controller.switchToPage("search",true);
     }
 
     @FXML
     void switchToParser(MouseEvent event) {
-
+        
     }
 
     @FXML

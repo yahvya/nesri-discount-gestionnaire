@@ -25,6 +25,8 @@ public abstract class Controller {
 
     private static ArrayList<String> newAddedStylesheets = new ArrayList<>();
 
+    private static String currentSection = null;
+
     /**
      * affiche le template accueil
      */
@@ -60,6 +62,8 @@ public abstract class Controller {
      * @param fxml le nom du fichier controller (format : parent borderbane)
      */
     public static void switchToPage(String fxml,boolean saveSection){
+        if(fxml == Controller.currentSection) return;
+
         Parent loadedSection = Controller.pages.get(fxml);
         
         if(loadedSection == null) loadedSection = App.loadFXML(fxml);
@@ -81,23 +85,19 @@ public abstract class Controller {
                     }
                 }   
                 else App.getStage().getScene().setRoot(loadedSection);
+
+                Controller.currentSection = fxml;
             }
             catch(Exception e){}
         }   
 
         try{
-            ObservableList<String> currentStyleSheets = Controller.pane.getStylesheets();
-
-            // suppressions des css ajoutés
-            Controller.newAddedStylesheets.forEach(stylesheet -> {
-                currentStyleSheets.remove(stylesheet); 
-                Controller.newAddedStylesheets.remove(stylesheet);
-            });
+            ObservableList<String> sceneStylesheets = App.getStage().getScene().getStylesheets();
             
             // ajout des nouveaux fichiers style
             loadedSection.getStylesheets().forEach(stylesheet -> {
-                if(!currentStyleSheets.contains(stylesheet) ){
-                    currentStyleSheets.add(stylesheet);
+                if(!Controller.newAddedStylesheets.contains(stylesheet) ){
+                    sceneStylesheets.add(stylesheet);
                     Controller.newAddedStylesheets.add(stylesheet);
                 }
             });

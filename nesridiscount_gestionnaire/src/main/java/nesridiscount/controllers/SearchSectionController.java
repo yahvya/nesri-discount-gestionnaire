@@ -18,7 +18,7 @@ import nesridiscount.app.ui_util.UiAlert;
 import nesridiscount.app.util.FileExporter;
 import nesridiscount.models.model.PiecesModel;
 
-public class SearchSectionController {
+public class SearchSectionController extends Controller{
     @FXML
     private CheckBox enterpriseNameFilter;
 
