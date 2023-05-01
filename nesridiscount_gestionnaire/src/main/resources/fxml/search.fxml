@@ -1,18 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import java.lang.String?>
 <?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="460.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nesridiscount.controllers.SearchSectionController">
    <center>
       <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <content>
-            <VBox prefHeight="200.0" prefWidth="100.0" styleClass="parent">
+            <VBox prefHeight="416.0" prefWidth="1172.0" styleClass="parent">
                <children>
                   <HBox alignment="CENTER" prefHeight="45.0" prefWidth="599.0" styleClass="search-container">
                      <children>
@@ -23,7 +32,68 @@
                            </children>
                         </HBox>
                      </children>
+                     <VBox.margin>
+                        <Insets bottom="30.0" />
+                     </VBox.margin>
                   </HBox>
+                  <BorderPane prefHeight="293.0" prefWidth="849.0" styleClass="search-container">
+                     <left>
+                        <VBox maxHeight="-Infinity" prefHeight="182.0" prefWidth="262.0" BorderPane.alignment="CENTER">
+                           <BorderPane.margin>
+                              <Insets right="50.0" />
+                           </BorderPane.margin>
+                           <styleClass>
+                              <String fx:value="up" />
+                              <String fx:value="filter-box" />
+                           </styleClass>
+                           <children>
+                              <Label styleClass="bold" text="Filtres de recherche" />
+                              <Line endX="124.29290771484375" endY="22.810707092285156" startX="-110.45657348632812" startY="22.8106689453125" styleClass="line">
+                                 <VBox.margin>
+                                    <Insets bottom="20.0" top="10.0" />
+                                 </VBox.margin>
+                              </Line>
+                              <FlowPane hgap="20.0" prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <CheckBox mnemonicParsing="false" selected="true" text="Nom" />
+                                    <CheckBox mnemonicParsing="false" selected="true" text="Reférence interne" />
+                                 </children>
+                              </FlowPane>
+                              <CheckBox mnemonicParsing="false" selected="true" text="Reférence fabriquant" />
+                           </children>
+                        </VBox>
+                     </left>
+                     <center>
+                        <TableView fx:id="resultArray" prefHeight="188.0" prefWidth="683.0" BorderPane.alignment="CENTER">
+                          <columns>
+                            <TableColumn fx:id="resultId" prefWidth="47.20001298189163" text="Id" />
+                            <TableColumn fx:id="resultManufacturerRef" prefWidth="131.19994735717773" text="Ref fabriquant" />
+                              <TableColumn fx:id="resultInternalRef" prefWidth="124.80006408691406" text="Ref interne" />
+                              <TableColumn fx:id="resultPieceName" minWidth="0.0" prefWidth="131.199951171875" text="Nom pièce" />
+                              <TableColumn fx:id="resultLocation" minWidth="0.0" prefWidth="208.00006103515625" text="Emplacement" />
+                              <TableColumn fx:id="resultQuantity" minWidth="0.0" prefWidth="88.79986572265625" text="Quantité" />
+                              <TableColumn fx:id="resultManufacturerName" prefWidth="159.2000732421875" text="Nom fabriquant" />
+                          </columns>
+                        </TableView>
+                     </center>
+                     <bottom>
+                        <HBox prefHeight="15.0" prefWidth="809.0" BorderPane.alignment="CENTER">
+                           <BorderPane.margin>
+                              <Insets top="30.0" />
+                           </BorderPane.margin>
+                           <children>
+                              <Label>
+                                 <graphic>
+                                    <FontAwesomeIconView onMouseClicked="#scrollToTop" size="20" styleClass="icon" text="" />
+                                 </graphic>
+                                 <tooltip>
+                                    <Tooltip text="Haut de page" />
+                                 </tooltip>
+                              </Label>
+                           </children>
+                        </HBox>
+                     </bottom>
+                  </BorderPane>
                </children>
             </VBox>
          </content>

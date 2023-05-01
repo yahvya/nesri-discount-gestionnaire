@@ -111,4 +111,12 @@ public abstract class Controller {
     public static void switchToPage(String fxml){
         Controller.switchToPage(fxml,false);
     }   
+    
+    /**
+     * 
+     * @return le parent app
+     */
+    public static ScrollPane getPane(){
+        return Controller.pane;
+    }
 }
