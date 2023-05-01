@@ -76,7 +76,7 @@ public abstract class Model {
      * @param conditions
      * @return liste des model trouvé
      */
-    public static ArrayList<Model> find(Class<? extends Model> toGet,Condition<?>[] conditions){
+    public static ArrayList<? extends Model> find(Class<? extends Model> toGet,Condition<?>[] conditions){
         ArrayList<Model> resultsList = new ArrayList<>();
 
         try{

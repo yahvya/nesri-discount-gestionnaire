@@ -8,5 +8,5 @@ public interface ProcessAction {
      * l'action à faire
      * @throws Exception en cas d'erreur
      */
-    public void toDoAdrer() throws Exception;
+    public void toDoAfter() throws Exception;
 }

@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import nesridiscount.app.session.Session;
+import nesridiscount.app.util.Action;
 import nesridiscount.controllers.Controller;
 
 /**
@@ -24,6 +25,8 @@ public class App extends Application {
     
     private static HashMap<String,Parent> savedPages;
 
+    private static HashMap<Object,Action> toStopOnClose = new HashMap<>();
+
     private static Image appIcon;
 
     public static void main(String[] args){
@@ -34,7 +37,7 @@ public class App extends Application {
     public void start(Stage primaryStage) throws Exception {
         App.classLoader = this.getClass();
         App.savedPages = new HashMap<>();
-        App.stage = primaryStage;
+        App.setStage(primaryStage);
         App.appIcon = new Image(App.loadResource("/icons/favicon.png").toString() );
 
         Parent parent = App.loadFXML("login");
@@ -113,11 +116,41 @@ public class App extends Application {
     }
 
     /**
+     * enregistre une action a faire à la fermeture
+     * @param on
+     * @param toDo
+     * @return l'action passé
+     */
+    public static Action registerAction(Object on,Action toDo){
+        App.toStopOnClose.put(on,toDo);
+        
+        return toDo;
+    }  
+    
+    /**
+     * supprime une action a faire à la fermeture
+     * @param on
+     */
+    public static void unregisterAction(Object on){
+        App.toStopOnClose.remove(on);
+    }  
+
+    /**
      * affecte le stage
      * @param stage
      */
     public static void setStage(Stage stage){
         App.stage = stage;
+
+        // exécution des actions à faire à la fermeture
+        stage.setOnCloseRequest((e) -> {
+            App.toStopOnClose.forEach((on,action) -> {
+                try{
+                    action.doAction();
+                }
+                catch(Exception exception){}
+            } );
+        });
     }
 
     /**

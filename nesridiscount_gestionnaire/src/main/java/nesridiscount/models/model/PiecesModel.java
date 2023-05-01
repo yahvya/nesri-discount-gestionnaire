@@ -21,7 +21,7 @@ public class PiecesModel extends Model{
     public String externalRef;
 
     @Column(linkedCol = "internal_ref")
-    public String interalRef;
+    public String internalRef;
 
     @Column(linkedCol = "location")
     public String location;
@@ -30,7 +30,7 @@ public class PiecesModel extends Model{
         super();
     }
 
-    public PiecesModel(int id, int quantity, String pieceName, String enterpriseName, String externalRef, String interalRef, String location) throws Exception{
+    public PiecesModel(int id, int quantity, String pieceName, String enterpriseName, String externalRef, String internalRef, String location) throws Exception{
         super();
         
         this.id = id;
@@ -38,8 +38,35 @@ public class PiecesModel extends Model{
         this.pieceName = pieceName;
         this.enterpriseName = enterpriseName;
         this.externalRef = externalRef;
-        this.interalRef = interalRef;
+        this.internalRef = internalRef;
         this.location = location;
     }
 
+    public int getId() {
+        return this.id;
+    }
+
+    public int getQuantity() {
+        return this.quantity;
+    }
+
+    public String getPieceName() {
+        return this.pieceName;
+    }
+
+    public String getEnterpriseName() {
+        return this.enterpriseName;
+    }
+
+    public String getExternalRef() {
+        return this.externalRef;
+    }
+
+    public String getInternalRef() {
+        return this.internalRef;
+    }
+
+    public String getLocation() {
+        return this.location;
+    }
 }

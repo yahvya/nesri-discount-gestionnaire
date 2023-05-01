@@ -114,6 +114,17 @@ public class Condition<T> {
         else query.setString(index,(String) this.data);
     }
 
+    /**
+     * 
+     * @param newSeparator
+     * @return this
+     */
+    public Condition<T> setSeparator(Separator newSeparator){
+        this.separator = newSeparator;
+
+        return this;
+    }
+
     public enum Type{
         EQUAL,
         LIKE,

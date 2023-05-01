@@ -4,9 +4,9 @@ package nesridiscount.app.process;
  * gestion d'un processus de l'application
  */
 public abstract class Process {
-    private ProcessAction afterStart = () -> this.doProcess();
-    private ProcessAction afterDo = () -> this.endProcess();
-    private ProcessAction afterEnd = null;
+    protected ProcessAction afterStart = () -> this.doProcess();
+    protected ProcessAction afterDo = () -> this.endProcess();
+    protected ProcessAction afterEnd = null;
 
     protected boolean isDelayed;
 
@@ -25,7 +25,7 @@ public abstract class Process {
      * @throws Exception en cas d'erreur
      */
     public Process startProcess() throws Exception{
-        if(this.isDelayed && this.afterStart != null) this.afterStart.toDoAdrer();
+        if(this.isDelayed && this.afterStart != null) this.afterStart.toDoAfter();
 
         return this;
     }
@@ -36,7 +36,7 @@ public abstract class Process {
      * @throws Exception en cas d'erreur
      */
     public Process doProcess() throws Exception{
-        if(this.isDelayed && this.afterDo != null) this.afterDo.toDoAdrer();
+        if(this.isDelayed && this.afterDo != null) this.afterDo.toDoAfter();
 
         return this;
     }
@@ -47,7 +47,7 @@ public abstract class Process {
      * @throws Exception en cas d'erreur
      */
     public Process endProcess() throws Exception{
-        if(this.isDelayed && this.afterEnd != null) this.afterEnd.toDoAdrer();
+        if(this.isDelayed && this.afterEnd != null) this.afterEnd.toDoAfter();
 
         return this;
     }
@@ -86,6 +86,20 @@ public abstract class Process {
     }
 
     /**
+     * lance de processus entier
+     * @return this
+     * @throws Exception
+     */
+    public Process execEntireProcess() throws Exception{
+        this
+            .startProcess()
+            .doProcess()
+            .endProcess();
+
+        return this;
+    }
+
+    /**
      * crée et lance les étapes d'un processus
      * @param toExec
      * @return le processus crée ou null si échec
@@ -114,10 +128,7 @@ public abstract class Process {
             if(afterEnd != null) createdProcess.setAfterStart(afterEnd);
 
             // lancement entier du processus
-            createdProcess
-                .startProcess()
-                .doProcess()
-                .endProcess();
+            createdProcess.execEntireProcess();
         }
 
         return createdProcess;

@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="582.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nesridiscount.controllers.SearchSectionController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="723.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nesridiscount.controllers.SearchSectionController">
    <center>
       <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <content>
@@ -29,7 +29,7 @@
                         <HBox alignment="CENTER" prefHeight="46.0" prefWidth="353.0" spacing="15.0">
                            <children>
                               <FontAwesomeIconView styleClass="icon" text="" />
-                              <TextField focusTraversable="false" prefHeight="32.0" prefWidth="300.0" promptText="Appuyez pour trouver des pièces" styleClass="search-input" />
+                              <TextField fx:id="searchbar" focusTraversable="false" onKeyTyped="#searchEvent" prefHeight="32.0" prefWidth="300.0" promptText="Appuyez pour trouver des pièces" styleClass="search-input" />
                            </children>
                         </HBox>
                      </children>
@@ -37,7 +37,7 @@
                         <Insets bottom="30.0" />
                      </VBox.margin>
                   </HBox>
-                  <BorderPane prefHeight="293.0" prefWidth="849.0" styleClass="search-container">
+                  <BorderPane prefHeight="596.0" prefWidth="1250.0" styleClass="search-container">
                      <bottom>
                         <HBox prefHeight="15.0" prefWidth="809.0" BorderPane.alignment="CENTER">
                            <BorderPane.margin>
@@ -73,22 +73,22 @@
                               </Line>
                               <FlowPane hgap="20.0" prefHeight="54.0" vgap="20.0">
                                  <children>
-                                    <CheckBox mnemonicParsing="false" selected="true" text="Nom">
+                                    <CheckBox fx:id="nameFilter" mnemonicParsing="false" onMouseReleased="#nameFilterChange" selected="true" text="Nom de la pièce">
                                        <tooltip>
                                           <Tooltip text="Ajouter la recherche par nom" />
                                        </tooltip>
                                     </CheckBox>
-                                    <CheckBox mnemonicParsing="false" selected="true" text="Reférence interne">
+                                    <CheckBox fx:id="internalRefFilter" mnemonicParsing="false" onMouseReleased="#internalRefFilterChange" selected="true" text="Reférence interne">
                                        <tooltip>
                                           <Tooltip text="Ajouter la recherche par référence interne" />
                                        </tooltip>
                                     </CheckBox>
-                                    <CheckBox layoutX="267.0" layoutY="10.0" mnemonicParsing="false" selected="true" text="Reférence fabriquant">
+                                    <CheckBox fx:id="enterpriseRefFilter" layoutX="267.0" layoutY="10.0" mnemonicParsing="false" onMouseReleased="#externalRefFilterChange" selected="true" text="Reférence fabriquant">
                                        <tooltip>
                                           <Tooltip text="Ajouter la recherche par référence fabriquant" />
                                        </tooltip>
                                     </CheckBox>
-                                    <CheckBox mnemonicParsing="false" selected="true" text="Reférence nom fabriquant">
+                                    <CheckBox fx:id="enterpriseNameFilter" mnemonicParsing="false" onMouseReleased="#enterpriseNameFilterChange" selected="true" text="Nom fabriquant">
                                        <tooltip>
                                           <Tooltip text="Ajouter la recherche par le nom du fabriquant" />
                                        </tooltip>
@@ -107,7 +107,7 @@
                         </VBox>
                      </top>
                      <center>
-                        <TableView fx:id="resultArray" minHeight="120.0" prefHeight="111.0" prefWidth="1210.0" BorderPane.alignment="CENTER">
+                        <TableView fx:id="resultArray" minHeight="120.0" prefHeight="132.0" prefWidth="1210.0" BorderPane.alignment="CENTER">
                           <columns>
                             <TableColumn fx:id="resultId" prefWidth="47.20001298189163" text="Id" />
                             <TableColumn fx:id="resultManufacturerRef" prefWidth="131.19994735717773" text="Ref fabriquant" />
