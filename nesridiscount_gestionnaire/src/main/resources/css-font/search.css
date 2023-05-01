@@ -41,7 +41,7 @@
 
 .table-view{
     -fx-font-size: 12.5px;
-    -fx-background-color: transparent;
+    -fx-background-color: -fx-bg;
 }
 
 .table-view .column-header-background .filler,.table-view .corner {
@@ -62,4 +62,9 @@
     -fx-border-radius: 3px;
     -fx-background-radius: 3px;
     -fx-background-color: -fx-upp-bg;
+    -fx-margin: 300px 300px 300px 300px !important;
+}
+
+.table-view .column-header .arrow {
+    -fx-background-color: -fx-text-color;
 }

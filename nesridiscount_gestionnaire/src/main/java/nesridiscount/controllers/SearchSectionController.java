@@ -1,10 +1,16 @@
 package nesridiscount.controllers;
 
+import java.util.ArrayList;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.input.MouseEvent;
+import nesridiscount.app.ui_util.UiAlert;
+import nesridiscount.models.model.PiecesModel;
 
 public class SearchSectionController {
 
@@ -32,6 +38,25 @@ public class SearchSectionController {
     @FXML
     private TableColumn<?, ?> resultQuantity;
 
+    private ArrayList<PiecesModel> results;
+
+    @FXML
+    void scrollToTop(){
+        ScrollPane pane = Controller.getPane();
+
+        pane.setVvalue(pane.getVmin() );
+    }
+
+    @FXML
+    void exportResults(MouseEvent e){
+        // vérification d'existance de résultats
+        if(this.results.size() == 0){
+            UiAlert.newAlert(AlertType.INFORMATION,"Echec d'export","Il n'y a aucun résultat à exporter").show();
+
+            return;
+        }
+    }
+
     @FXML
     void initialize(){
         Label holder = new Label("Aucun résultat");
@@ -39,12 +64,6 @@ public class SearchSectionController {
         holder.getStyleClass().add("holder");
 
         this.resultArray.setPlaceholder(holder);
-    }
-
-    @FXML
-    void scrollToTop(){
-        ScrollPane pane = Controller.getPane();
-
-        pane.setVvalue(pane.getVmin() );
+        this.results = new ArrayList<>();
     }
 }

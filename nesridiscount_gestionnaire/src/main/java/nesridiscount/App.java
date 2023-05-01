@@ -24,6 +24,8 @@ public class App extends Application {
     
     private static HashMap<String,Parent> savedPages;
 
+    private static Image appIcon;
+
     public static void main(String[] args){
         App.launch();
     }
@@ -31,8 +33,9 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         App.classLoader = this.getClass();
-        App.stage = primaryStage;
         App.savedPages = new HashMap<>();
+        App.stage = primaryStage;
+        App.appIcon = new Image(App.loadResource("/icons/favicon.png").toString() );
 
         Parent parent = App.loadFXML("login");
 
@@ -50,7 +53,7 @@ public class App extends Application {
      */
     public static void setWindowConfig(){
         App.stage.setTitle("Nesri discount - Gestionnaire");
-        App.stage.getIcons().add(new Image(App.loadResource("/icons/favicon.png").toString() ) );
+        App.stage.getIcons().add(App.appIcon);
         App.stage.setScene(App.scene);
         App.stage.show();
     }
@@ -117,7 +120,19 @@ public class App extends Application {
         App.stage = stage;
     }
 
+    /**
+     * 
+     * @return la fenêtre actuelle de l'application
+     */
     public static Stage getStage(){
         return App.stage;
+    }
+
+    /**
+     * 
+     * @return l'icone de l'application
+     */
+    public static Image getAppIcon(){
+        return App.appIcon;
     }
 }

@@ -46,6 +46,7 @@
     -fx-padding: 10px;
     -fx-border-radius: 5px;
     -fx-background-radius: 5px;
+    -fx-background-color: -fx-special;
 }
 
 .button:hover{
@@ -75,4 +76,23 @@
     -fx-background-radius: 3px;
     -fx-font-weight: bold;
     -fx-font-size: 12.5px;
+}
+
+.dialog-pane{
+    -fx-border-color: -fx-border;
+    -fx-border-width: 1px;
+    -fx-background-color: -fx-upp-bg;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+.dialog-pane .button{
+    -fx-font-size: 12.5px !important;
+    -fx-padding: 5px !important;
+}
+
+.dialog-pane .header-panel{
+    -fx-background-color: -fx-upp-bg;
+    -fx-padding: 5px 10px 0px;
+    -fx-font-weight: bold;
 }
