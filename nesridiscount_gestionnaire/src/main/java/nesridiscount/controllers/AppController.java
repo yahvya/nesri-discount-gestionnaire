@@ -48,7 +48,7 @@ public class AppController extends Controller{
 
     @FXML
     void showFileParser(MouseEvent event) {
-        Controller.switchToPage("parser");
+        Controller.switchToPage("parser",true);
     }
 
     @FXML

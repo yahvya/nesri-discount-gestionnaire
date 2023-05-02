@@ -1,36 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="665.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <content>
-            <VBox prefHeight="200.0" prefWidth="100.0" styleClass="parent">
+            <VBox fx:id="formsContainer" prefHeight="200.0" prefWidth="100.0" styleClass="parent">
                <children>
                   <BorderPane prefHeight="62.0" prefWidth="599.0">
                      <left>
                         <Label styleClass="page-title" text="Traiter vos fichiers de prix" BorderPane.alignment="CENTER">
                            <BorderPane.margin>
-                              <Insets left="10.0" />
+                              <Insets />
                            </BorderPane.margin>
                         </Label>
                      </left>
                      <right>
                         <Button mnemonicParsing="false" text="Traiter les fichiers" BorderPane.alignment="CENTER">
                            <BorderPane.margin>
-                              <Insets right="10.0" />
+                              <Insets />
                            </BorderPane.margin>
                         </Button>
                      </right>
                   </BorderPane>
-               </children></VBox>
+                  <Label styleClass="description" text="Choisissez les fichiers à traiter (5 maximum) en cliquant sur le boutton ajouter." wrapText="true">
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label prefWidth="579.0" styleClass="description" text="Une fois tous les fichiers saisi appuyez sur le boutton traiter pour lancement le traitement des fichiers" wrapText="true" />
+                  <Label styleClass="description" text="Télécharger ensuite les fichiers traités" />
+                  <Label text="Fichiers traités">
+                     <VBox.margin>
+                        <Insets bottom="20.0" top="20.0" />
+                     </VBox.margin>
+                  </Label>
+                  <FlowPane prefHeight="120.0" prefWidth="579.0">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </FlowPane>
+                  <Button mnemonicParsing="false" text="Ajouter un fichier">
+                     <VBox.margin>
+                        <Insets bottom="40.0" />
+                     </VBox.margin>
+                  </Button>
+                  <VBox fx:id="defaultModel" prefHeight="131.0" prefWidth="579.0" styleClass="form">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" spacing="20.0">
+                           <children>
+                              <Label styleClass="file-title" text="chemin du fichier" />
+                              <Label>
+                                 <graphic>
+                                    <FontAwesomeIconView styleClass="icon" text="" />
+                                 </graphic>
+                                 <tooltip>
+                                    <Tooltip text="Supprimer" />
+                                 </tooltip>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <TextField promptText="Numéro des colonnes à traiter séparés d'une virgule">
+                           <VBox.margin>
+                              <Insets bottom="20.0" top="20.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <TextField promptText="Formules lié aux colonnes séparés d'une virgule (numero:formule,)" />
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="20.0" left="20.0" />
+                     </VBox.margin>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets left="10.0" right="10.0" />
+               </padding></VBox>
          </content>
       </ScrollPane>
    </center>

@@ -9,6 +9,7 @@
     -fx-special-2: #2EE5A8;
     -fx-icon: #dfdcdc;
     -fx-border: #424242;
+    -fx-error: #ce0e0e;
 
     -fx-text-fill: -fx-text-color;
     -fx-font-family: "Kanit";
