@@ -96,3 +96,7 @@
     -fx-padding: 5px 10px 0px;
     -fx-font-weight: bold;
 }
+
+.bordered{
+    -fx-border-color: -fx-border;
+}

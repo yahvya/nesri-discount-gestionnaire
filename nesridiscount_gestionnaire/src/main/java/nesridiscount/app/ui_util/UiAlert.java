@@ -1,7 +1,9 @@
 package nesridiscount.app.ui_util;
 
 import javafx.scene.control.Alert;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import nesridiscount.App;
@@ -23,7 +25,11 @@ public class UiAlert {
         createdAlert.setHeaderText(title);
 
         try{
-            Stage alertStage = (Stage) createdAlert.getDialogPane().getScene().getWindow();
+            DialogPane dialogPane = createdAlert.getDialogPane();
+
+            Stage alertStage = (Stage) dialogPane.getScene().getWindow();
+
+            dialogPane.setMinHeight(Region.USE_PREF_SIZE);
 
             alertStage.initStyle(StageStyle.UNDECORATED);
             alertStage.getIcons().add(App.getAppIcon() );

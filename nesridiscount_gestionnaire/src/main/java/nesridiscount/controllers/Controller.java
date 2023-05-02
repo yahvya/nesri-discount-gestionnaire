@@ -23,8 +23,6 @@ public abstract class Controller {
 
     private static HashMap<String,Parent> pages = new HashMap<>();
 
-    private static ArrayList<String> newAddedStylesheets = new ArrayList<>();
-
     private static String currentSection = null;
 
     /**
@@ -53,6 +51,10 @@ public abstract class Controller {
         window.show();
     }
     
+    /**
+     * modifie le pane
+     * @param pane
+     */
     public static void setPane(ScrollPane pane){
         Controller.pane = pane;
     }
@@ -83,26 +85,28 @@ public abstract class Controller {
 
                         Controller.pane.setContent(loadedSectionContent);
                     }
-                }   
-                else App.getStage().getScene().setRoot(loadedSection);
 
-                Controller.currentSection = fxml;
+                    // ajout des css
+                    ObservableList<String> stylesheets = Controller.pane.getStylesheets();
+
+                    ArrayList<String> toRemove = new ArrayList<>(stylesheets);
+
+                    // suppression des css précédemment ajouté
+                    toRemove.forEach(stylesheet -> stylesheets.remove(stylesheet) );
+
+                    // ajout des nouveaux css
+                    loadedSection.getStylesheets().forEach(stylesheet -> stylesheets.add(stylesheet) );
+
+                    Controller.currentSection = fxml;
+                }   
+                else{
+                    App.getStage().getScene().setRoot(loadedSection);
+
+                    Controller.currentSection = null;
+                }
             }
             catch(Exception e){}
         }   
-
-        try{
-            ObservableList<String> sceneStylesheets = App.getStage().getScene().getStylesheets();
-            
-            // ajout des nouveaux fichiers style
-            loadedSection.getStylesheets().forEach(stylesheet -> {
-                if(!Controller.newAddedStylesheets.contains(stylesheet) ){
-                    sceneStylesheets.add(stylesheet);
-                    Controller.newAddedStylesheets.add(stylesheet);
-                }
-            });
-        }
-        catch(Exception e){}
     }   
 
     /**

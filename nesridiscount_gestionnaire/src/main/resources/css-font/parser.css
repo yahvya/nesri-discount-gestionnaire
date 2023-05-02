@@ -1,0 +1,12 @@
+.page-title{
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+    -fx-background-color: -fx-upp-bg;
+    -fx-border-radius: 3px;
+    -fx-background-radius: 3px;
+    -fx-padding: 10px;
+}
+
+.button{
+    -fx-padding: 5px;
+}

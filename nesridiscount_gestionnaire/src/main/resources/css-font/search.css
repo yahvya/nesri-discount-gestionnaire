@@ -69,8 +69,6 @@
     -fx-background-color: -fx-text-color;
 }
 
-/* la  */
-
 .table-view .table-cell{
     -fx-border-color: transparent;
     -fx-padding: 2 0 2 10px;
