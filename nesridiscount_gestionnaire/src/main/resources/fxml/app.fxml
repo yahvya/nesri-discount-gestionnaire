@@ -32,7 +32,7 @@
                   <Insets top="50.0" />
                </VBox.margin>
                <children>
-                  <Label fx:id="searchPiecesLabel" alignment="CENTER" onMouseClicked="#showSearchPieces" prefHeight="22.0" prefWidth="22.0">
+                  <Label fx:id="searchPiecesLabel" alignment="CENTER" onMouseClicked="#switchToSearchPieces" prefHeight="22.0" prefWidth="22.0">
                      <graphic>
                         <FontAwesomeIconView fx:id="search" size="17" styleClass="icon" text="" />
                      </graphic>
@@ -40,15 +40,15 @@
                         <Tooltip text="Rechercher des pièces " />
                      </tooltip>
                   </Label>
-                  <Label fx:id="addPiecesLabel" alignment="CENTER" onMouseClicked="#showAddPieces" prefHeight="26.0" prefWidth="38.0">
+                  <Label fx:id="addPiecesLabel" alignment="CENTER" onMouseClicked="#switchToAddPieces" prefHeight="26.0" prefWidth="38.0">
                      <graphic>
-                        <FontAwesomeIconView size="17" styleClass="icon" text="" />
+                        <FontAwesomeIconView fx:id="addPiece" size="17" styleClass="icon" text="" />
                      </graphic>
                      <tooltip>
                         <Tooltip text="Ajouter une / des pièces" />
                      </tooltip>
                   </Label>
-                  <Label alignment="CENTER" onMouseClicked="#showFileParser" prefHeight="26.0" prefWidth="38.0">
+                  <Label alignment="CENTER" onMouseClicked="#switchToFileParser" prefHeight="26.0" prefWidth="38.0">
                      <graphic>
                         <FontAwesomeIconView onMouseClicked="#switchToParser" size="17" styleClass="icon" text="" />
                      </graphic>
@@ -56,7 +56,15 @@
                         <Tooltip text="Traiter les fiches de prix" />
                      </tooltip>
                   </Label>
-                  <Label fx:id="parametersLabel" alignment="CENTER" onMouseClicked="#showParameters" prefHeight="22.0" prefWidth="37.0">
+                  <Label fx:id="calendarLabel" onMouseClicked="#switchToCalendar">
+                     <graphic>
+                        <FontAwesomeIconView styleClass="icon" text="" />
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Calendrier des missions" />
+                     </tooltip>
+                  </Label>
+                  <Label fx:id="parametersLabel" alignment="CENTER" onMouseClicked="#switchToParameters" prefHeight="22.0" prefWidth="37.0">
                      <graphic>
                         <FontAwesomeIconView size="17" styleClass="icon" text="" />
                      </graphic>
@@ -64,7 +72,7 @@
                         <Tooltip text="Paramètres de l'application et du compte" />
                      </tooltip>
                   </Label>
-                  <Label onMouseClicked="#showHelp">
+                  <Label onMouseClicked="#switchToHelp">
                      <graphic>
                         <FontAwesomeIconView size="17" styleClass="icon" text="" />
                      </graphic>

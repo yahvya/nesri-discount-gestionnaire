@@ -107,15 +107,15 @@
                         </VBox>
                      </top>
                      <center>
-                        <TableView fx:id="resultArray" minHeight="120.0" prefHeight="132.0" prefWidth="1210.0" BorderPane.alignment="CENTER">
+                        <TableView fx:id="resultArray" editable="true" minHeight="120.0" prefHeight="132.0" prefWidth="1210.0" BorderPane.alignment="CENTER">
                           <columns>
-                            <TableColumn fx:id="resultId" prefWidth="47.20001298189163" text="Id" />
-                            <TableColumn fx:id="resultManufacturerRef" prefWidth="131.19994735717773" text="Ref fabriquant" />
-                              <TableColumn fx:id="resultInternalRef" prefWidth="124.80006408691406" text="Ref interne" />
-                              <TableColumn fx:id="resultPieceName" minWidth="0.0" prefWidth="131.199951171875" text="Nom pièce" />
-                              <TableColumn fx:id="resultLocation" minWidth="0.0" prefWidth="429.6000061035156" text="Emplacement" />
-                              <TableColumn fx:id="resultQuantity" minWidth="0.0" prefWidth="83.20001220703125" text="Quantité" />
-                              <TableColumn fx:id="resultManufacturerName" prefWidth="260.7999267578125" text="Nom fabriquant" />
+                            <TableColumn fx:id="resultId" editable="false" prefWidth="47.20001298189163" text="Id" />
+                            <TableColumn fx:id="resultManufacturerRef" onEditCommit="#editEnterpriseRef" prefWidth="131.19994735717773" text="Ref fabriquant" />
+                              <TableColumn fx:id="resultInternalRef" onEditCommit="#editInternalRef" prefWidth="124.80006408691406" text="Ref interne" />
+                              <TableColumn fx:id="resultPieceName" minWidth="0.0" onEditCommit="#editPieceName" prefWidth="131.199951171875" text="Nom pièce" />
+                              <TableColumn fx:id="resultLocation" minWidth="0.0" onEditCommit="#editLocation" prefWidth="429.6000061035156" text="Emplacement" />
+                              <TableColumn fx:id="resultQuantity" minWidth="0.0" onEditCommit="#editQuantity" prefWidth="83.20001220703125" text="Quantité" />
+                              <TableColumn fx:id="resultManufacturerName" onEditCommit="#editEnterpriseName" prefWidth="260.7999267578125" text="Nom fabriquant" />
                           </columns>
                            <BorderPane.margin>
                               <Insets />

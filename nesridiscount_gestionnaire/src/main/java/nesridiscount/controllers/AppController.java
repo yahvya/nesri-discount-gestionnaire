@@ -14,10 +14,13 @@ import nesridiscount.app.session.Session.Role;
 
 public class AppController extends Controller{
     @FXML
-    private ScrollPane toReplace;
+    private FontAwesomeIconView addPiece;
 
     @FXML
     private Label addPiecesLabel;
+
+    @FXML
+    private Label calendarLabel;
 
     @FXML
     private VBox navbar;
@@ -32,6 +35,9 @@ public class AppController extends Controller{
     private Label searchPiecesLabel;
 
     @FXML
+    private ScrollPane toReplace;
+
+    @FXML
     private Label username;
 
     @FXML
@@ -42,33 +48,38 @@ public class AppController extends Controller{
     }
 
     @FXML
-    void showAddPieces(MouseEvent event) {
+    void switchToAddPieces(MouseEvent event) {
 
     }
 
     @FXML
-    void showFileParser(MouseEvent event) {
+    void switchToFileParser(MouseEvent event) {
         Controller.switchToPage("parser",true);
     }
 
     @FXML
-    void showHelp(MouseEvent event) {
+    void switchToHelp(MouseEvent event) {
 
     }
 
     @FXML
-    void showParameters(MouseEvent event) {
+    void switchToParameters(MouseEvent event) {
 
     }
 
     @FXML
-    void showSearchPieces(MouseEvent event) {
+    void switchToSearchPieces(MouseEvent event) {
         Controller.switchToPage("search",true);
     }
 
     @FXML
     void switchToParser(MouseEvent event) {
         
+    }
+
+    @FXML
+    void switchToCalendar(MouseEvent event) {
+
     }
 
     @FXML
@@ -81,8 +92,10 @@ public class AppController extends Controller{
         String toShow = "search";
         boolean keepPage = true;
 
+        Role userRole = Session.getRole();
+
         // suppression des élements de navigation en fonction du role
-        if(Session.getRole() == Role.Inter){
+        if(userRole == Role.Inter){
             children.removeAll(
                 this.addPiecesLabel,
                 this.searchPiecesLabel
@@ -91,6 +104,8 @@ public class AppController extends Controller{
             toShow = "parser";
             keepPage = false;
         }
+
+        if(userRole != Role.Admin) children.remove(this.calendarLabel);
 
         Controller.setPane(this.toReplace);
         Controller.switchToPage(toShow,keepPage);

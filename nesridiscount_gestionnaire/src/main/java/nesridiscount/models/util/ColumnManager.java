@@ -44,4 +44,8 @@ public class ColumnManager{
             return false;
         }
     }
+
+    public Field getField(){
+        return this.linkedField;
+    }
 }

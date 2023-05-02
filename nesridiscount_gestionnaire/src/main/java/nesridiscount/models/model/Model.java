@@ -9,6 +9,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import nesridiscount.App;
 import nesridiscount.models.util.Column;
@@ -46,6 +49,58 @@ public abstract class Model {
         catch(Exception e){
             throw new Exception();
         }
+    }
+
+    /**
+     * met à jour le model en base de donnée
+     * @param where les clés attributs de conditions à utilisé
+     * @return si la mise à jour a réussi
+     */
+    public boolean update(String ...where){
+        try{
+            String request = "update " + this.tableName + " set ";
+
+            Set<Entry<String, ColumnManager>> entries = this.columnsManagers.entrySet();
+
+            for(Map.Entry<String,ColumnManager> entry : entries) request += entry.getValue().getLinkedColName() + "=?,";
+
+            request = request.substring(0,request.length() - 1);
+
+            if(where.length != 0){
+                request += " where ";
+
+                for(String attributeName : where) request += this.columnsManagers.get(attributeName).getLinkedColName() + " = ? and ";
+
+                request = request.substring(0,request.length() - 4);
+            }
+
+            PreparedStatement preparedQuery = Model.getConnection().prepareStatement(request);
+
+            int index = 1;
+
+            // bind des valeurs à affecter
+            for(Map.Entry<String,ColumnManager> entry : entries){
+                Model.setValueInQuery(preparedQuery,entry.getValue().getField(),this,index);
+                
+                index++;
+            }
+
+            // bind des conditions where
+            if(where.length != 0){
+                for(String attributeName : where){
+                    Model.setValueInQuery(preparedQuery,this.columnsManagers.get(attributeName).getField(),this,index);
+                    
+                    index++;
+                }
+            }
+
+            preparedQuery.executeUpdate();
+
+            return true;
+        }   
+        catch(Exception e){}
+
+        return false;
     }
 
     /**
@@ -160,6 +215,25 @@ public abstract class Model {
         catch(Exception e){
             return null;
         }
+    }
+
+    /**
+     * ajoute la valeur dans la requete
+     * @param query
+     * @param toSetIn
+     */
+    private static void setValueInQuery(PreparedStatement query,Field toSetIn,Model linkedModel,int paramIndex){
+        try{
+            Object toSet = toSetIn.get(linkedModel);
+
+            if(toSet instanceof Integer)
+                query.setInt(paramIndex,(Integer) toSet);
+            else if(toSet instanceof Long)
+                query.setLong(paramIndex,(Long) toSet);
+            else if(toSet instanceof String)
+                query.setString(paramIndex,(String) toSet);
+        }
+        catch(Exception e){}
     }
 
     /**

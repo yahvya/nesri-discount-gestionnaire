@@ -160,8 +160,17 @@ public class Session {
     }
 
     public enum Role{
+        /**
+         * super administrateur
+         */
         Admin(1),
+        /**
+         * administrateur
+         */
         Special(2),
+        /**
+         * stagiaire
+         */
         Inter(3);
 
         public final int roleId;

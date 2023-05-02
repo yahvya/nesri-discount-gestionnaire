@@ -42,6 +42,29 @@ public class PiecesModel extends Model{
         this.location = location;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+    public void setPieceName(String pieceName) {
+        this.pieceName = pieceName;
+    }
+    public void setEnterpriseName(String enterpriseName) {
+        this.enterpriseName = enterpriseName;
+    }
+    public void setExternalRef(String externalRef) {
+        this.externalRef = externalRef;
+    }
+    public void setInternalRef(String internalRef) {
+        this.internalRef = internalRef;
+    }
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+
     public int getId() {
         return this.id;
     }

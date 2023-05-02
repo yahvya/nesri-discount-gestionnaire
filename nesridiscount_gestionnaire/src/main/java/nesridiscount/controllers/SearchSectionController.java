@@ -10,8 +10,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.util.StringConverter;
 import nesridiscount.app.process.SearchPiecesProcess;
 import nesridiscount.app.process.SearchPiecesProcess.PieceFilter;
 import nesridiscount.app.ui_util.UiAlert;
@@ -88,7 +90,7 @@ public class SearchSectionController extends Controller{
             "Export des résultats",
             FileExporter.export(csvData,"*.csv") ? 
                 "Votre fichier a bien été sauvegardé" : 
-                "Une erreur s'est produite lors de la sauvegarde de votre fichier veuillez retenter ou relancer l'application !").show();
+                "Echec d'enregistrement du fichier").show();
     }
 
     @FXML
@@ -131,6 +133,77 @@ public class SearchSectionController extends Controller{
         catch(Exception e){}
     }
 
+    @FXML
+    void editEnterpriseName(TableColumn.CellEditEvent<PiecesModel,String> event) {
+        String newName = event.getNewValue();
+        
+        if(event.getOldValue() != newName){
+            PiecesModel model = event.getRowValue();
+
+            model.setEnterpriseName(newName);
+            model.update("id");
+        }
+    }   
+
+    @FXML
+    void editEnterpriseRef(TableColumn.CellEditEvent<PiecesModel,String> event) {
+        String newEnterpriseRef = event.getNewValue();
+        
+        if(event.getOldValue() != newEnterpriseRef){
+            PiecesModel model = event.getRowValue();
+
+            model.setExternalRef(newEnterpriseRef);
+            model.update("id");
+        }
+    }
+
+    @FXML
+    void editInternalRef(TableColumn.CellEditEvent<PiecesModel,String> event) {
+        String newInternalRef = event.getNewValue();
+        
+        if(event.getOldValue() != newInternalRef){
+            PiecesModel model = event.getRowValue();
+
+            model.setInternalRef(newInternalRef);
+            model.update("id");
+        }
+    }
+
+    @FXML
+    void editLocation(TableColumn.CellEditEvent<PiecesModel,String> event) {
+        String newLocation = event.getNewValue();
+        
+        if(event.getOldValue() != newLocation){
+            PiecesModel model = event.getRowValue();
+
+            model.setLocation(newLocation);
+            model.update("id");
+        }
+    }
+
+    @FXML
+    void editPieceName(TableColumn.CellEditEvent<PiecesModel,String> event) {
+        String newPieceName = event.getNewValue();
+        
+        if(event.getOldValue() != newPieceName){
+            PiecesModel model = event.getRowValue();
+
+            model.setPieceName(newPieceName);
+            model.update("id");
+        }
+    }
+
+    @FXML
+    void editQuantity(TableColumn.CellEditEvent<PiecesModel,Integer> event) {
+        Integer newQuantity = event.getNewValue();
+        
+        if(event.getOldValue() != newQuantity){
+            PiecesModel model = event.getRowValue();
+
+            model.setQuantity(newQuantity);
+            model.update("id");
+        }
+    }
 
     @FXML
     void initialize(){
@@ -148,10 +221,33 @@ public class SearchSectionController extends Controller{
             this.resultManufacturerRef.setCellValueFactory(new PropertyValueFactory<>("externalRef") );
             this.resultPieceName.setCellValueFactory(new PropertyValueFactory<>("pieceName") );
             this.resultQuantity.setCellValueFactory(new PropertyValueFactory<>("quantity") );
+
+            this.resultInternalRef.setCellFactory(TextFieldTableCell.forTableColumn() );
+            this.resultLocation.setCellFactory(TextFieldTableCell.forTableColumn() );
+            this.resultManufacturerName.setCellFactory(TextFieldTableCell.forTableColumn() );
+            this.resultManufacturerRef.setCellFactory(TextFieldTableCell.forTableColumn() );
+            this.resultPieceName.setCellFactory(TextFieldTableCell.forTableColumn() );
+            this.resultQuantity.setCellFactory(TextFieldTableCell.forTableColumn(new CustomIntConverter() ) );
         }
         catch(Exception e){}
 
         // création du processus de recherche
         this.searchProcess = new SearchPiecesProcess(this.resultArray);
+    }
+
+    /**
+     * convertisseur entier
+     */
+    static class CustomIntConverter extends StringConverter<Integer>{
+
+        @Override
+        public String toString(Integer object) {
+            return Integer.toString(object);
+        }
+
+        @Override
+        public Integer fromString(String string) {
+            return Integer.parseInt(string);
+        }
     }
 }
