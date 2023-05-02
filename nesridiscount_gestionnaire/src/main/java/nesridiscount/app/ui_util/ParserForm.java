@@ -110,4 +110,12 @@ public class ParserForm {
 
         return this;
     }
+
+    public VBox getParent(){
+        return this.parent;
+    }
+
+    public File getSelectedFile(){
+        return this.file;
+    }
 }

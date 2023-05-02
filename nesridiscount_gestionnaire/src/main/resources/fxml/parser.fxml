@@ -7,6 +7,7 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="665.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nesridiscount.controllers.ParserController">
@@ -38,14 +39,18 @@
                   </Label>
                   <Label prefWidth="579.0" styleClass="description" text="Une fois tous les fichiers saisi appuyez sur le boutton traiter pour lancement le traitement des fichiers" wrapText="true" />
                   <Label styleClass="description" text="Télécharger ensuite les fichiers traités" />
-                  <Label text="Fichiers traités">
+                  <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="20.0">
+                     <children>
+                        <Label text="Fichiers traités" />
+                        <Label styleClass="sm" text="(Aucun fichier en cours de traitement)" />
+                     </children>
                      <VBox.margin>
-                        <Insets bottom="20.0" top="20.0" />
+                        <Insets top="20.0" />
                      </VBox.margin>
-                  </Label>
+                  </HBox>
                   <FlowPane fx:id="parsedFiles" prefHeight="120.0" prefWidth="579.0">
                      <VBox.margin>
-                        <Insets bottom="10.0" />
+                        <Insets bottom="20.0" top="20.0" />
                      </VBox.margin>
                   </FlowPane>
                   <Button mnemonicParsing="false" onMouseClicked="#addFile" text="Ajouter un fichier">

@@ -73,11 +73,6 @@ public class AppController extends Controller{
     }
 
     @FXML
-    void switchToParser(MouseEvent event) {
-        
-    }
-
-    @FXML
     void switchToCalendar(MouseEvent event) {
 
     }
@@ -102,7 +97,6 @@ public class AppController extends Controller{
             );
 
             toShow = "parser";
-            keepPage = false;
         }
 
         if(userRole != Role.Admin) children.remove(this.calendarLabel);

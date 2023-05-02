@@ -31,3 +31,7 @@
 .form .error-field{
     -fx-border-color: -fx-error; 
 }
+
+.sm{
+    -fx-font-size: 11px;
+}

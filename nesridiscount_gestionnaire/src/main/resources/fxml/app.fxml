@@ -50,7 +50,7 @@
                   </Label>
                   <Label alignment="CENTER" onMouseClicked="#switchToFileParser" prefHeight="26.0" prefWidth="38.0">
                      <graphic>
-                        <FontAwesomeIconView onMouseClicked="#switchToParser" size="17" styleClass="icon" text="" />
+                        <FontAwesomeIconView size="17" styleClass="icon" text="" />
                      </graphic>
                      <tooltip>
                         <Tooltip text="Traiter les fiches de prix" />
