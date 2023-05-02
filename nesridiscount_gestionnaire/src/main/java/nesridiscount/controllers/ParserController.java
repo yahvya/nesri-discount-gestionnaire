@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import javax.swing.filechooser.FileSystemView;
 
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -111,16 +112,20 @@ public class ParserController extends Controller {
 
                 PriceFileParser parser = new PriceFileParser(selectedFile);
 
-                parser.setToDoOnFail(() -> {
-                    result.setAsParsedIn(parser.getDstFile() );
-
-                    this.setToWait(this.toWait - 1);
+                parser.setToDoOnSuccess(() -> {
+                    Platform.runLater(() -> {
+                        result.setAsParsedIn(parser.getCsvContent() );
+    
+                        this.setToWait(this.toWait - 1);
+                    });
                 });
 
-                parser.setToDoOnSuccess(() -> {
-                    result.setAsFailed();
-
-                    this.setToWait(this.toWait - 1);
+                parser.setToDoOnFail(() -> {
+                    Platform.runLater(() -> {
+                        result.setAsFailed();
+    
+                        this.setToWait(this.toWait - 1);
+                    });
                 } );
 
                 // lancement du parseur

@@ -10,10 +10,8 @@ public class PriceFileParser extends Thread{
     private Action toDoOnFail;
     
     private File toParse;
-    /**
-     * contient les données du fichier généré
-     */
-    private File dstFile;
+    
+    private String csvContent = "";
 
     public PriceFileParser(File toParse) throws Exception{
         this.toParse = toParse;
@@ -32,15 +30,18 @@ public class PriceFileParser extends Thread{
 
     @Override
     public void run(){
-
+        try{
+            this.toDoOnSuccess.doAction();
+        }
+        catch(Exception e){}
     }
 
     public File getToParse() {
         return this.toParse;
     }
 
-    public File getDstFile() {
-        return this.dstFile;
+    public String getCsvContent() {
+        return this.csvContent;
     }
     
 }

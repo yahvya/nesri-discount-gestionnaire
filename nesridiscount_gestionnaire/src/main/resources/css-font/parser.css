@@ -35,3 +35,16 @@
 .sm{
     -fx-font-size: 11px;
 }
+
+.parse-result{
+    -fx-background-color: -fx-upp-bg;
+    -fx-padding: 10px;
+    -fx-border-radius: 3px;
+    -fx-background-radius: 7px;
+    -fx-font-size: 12.5px;
+    -fx-effect: dropshadow(three-pass-box,-fx-border, 10, 0, 0, 0);
+}
+
+.bold{
+    -fx-font-weight: bold;
+}
