@@ -95,6 +95,9 @@
                <BorderPane.margin>
                   <Insets left="5.0" />
                </BorderPane.margin>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
             </ScrollPane>
          </center>
          <bottom>

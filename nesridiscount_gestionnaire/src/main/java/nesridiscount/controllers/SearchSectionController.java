@@ -86,7 +86,7 @@ public class SearchSectionController extends Controller{
         UiAlert.newAlert(
             AlertType.INFORMATION,
             "Export des résultats",
-            FileExporter.export(csvData,".csv") ? 
+            FileExporter.export(csvData,"*.csv") ? 
                 "Votre fichier a bien été sauvegardé" : 
                 "Une erreur s'est produite lors de la sauvegarde de votre fichier veuillez retenter ou relancer l'application !").show();
     }
