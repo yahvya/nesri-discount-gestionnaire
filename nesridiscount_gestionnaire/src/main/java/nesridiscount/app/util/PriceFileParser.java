@@ -5,6 +5,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * parseur de fichier
@@ -42,6 +44,8 @@ public class PriceFileParser extends Thread{
                 this.parseCsv();
             else
                 this.parseXlxs();   
+
+            System.out.println(this.csvContent);
 
             this.toDoOnSuccess.doAction();
         }
@@ -169,10 +173,66 @@ public class PriceFileParser extends Thread{
      * @param formulasMap
      */
     private void addLine(String[] lineDatas,ArrayList<Integer> columnsToGet,HashMap<Integer,String> formulasMap){
-        String toGet[] = new String[columnsToGet.size()];
+        try{
+            String toGet[] = new String[columnsToGet.size()];
 
+            // construction de la chaine en parsant les colonnes
+            for(int index = 0; index < toGet.length; index++){
+                // récupération de la valeur de la colonne
+                int indexToGet = columnsToGet.get(index);
+
+                String colValue = indexToGet < lineDatas.length ? lineDatas[indexToGet] : null;
+
+                // colonne vide
+                if(colValue == null){
+                    toGet[index] = "";
+
+                    continue;
+                }
+
+                String formula = formulasMap.get(indexToGet);
+
+                // sans formule on conserve la valeur de base
+                if(formula == null){
+                    toGet[index] = colValue;
+                    
+                    continue;
+                }
+
+                // colonne avec formule à appliquer
+                toGet[index] = this.parseFormula(lineDatas,formula);
+            }
+
+            this.csvContent += String.join(",",toGet) + "\n";
+        }
+        catch(Exception e){}
+    }
+
+    /**
+     * parse la formule et 
+     * @param linesData
+     * @param formula
+     * @return la chaine contenant le résultat de la formule
+     * @throws Exception en cas d'erreur lors du parse
+     */
+    private String parseFormula(String[] linesData,String formula) throws Exception{
+        // ajout de parenthèses autour du calcul pour l'algorithme parenthèse
+        formula = "(" + formula + ")";
+
+        // recherche et remplacement des valeurs de colonne dans la formule
+        Matcher matcher = Pattern.compile("\\[[0-9]+\\]").matcher(formula);
         
+        while(matcher.find() ){
+            String match = matcher.group();
 
-        this.csvContent += String.join(",",toGet) + "\n";
+            Integer index = Integer.parseInt(match.replace("[","").replace("]","") ) - 1;
+
+            if(index < linesData.length) 
+                formula = formula.replace(match,linesData[index]);
+            else
+                continue;
+        }
+
+        return Double.toString(Calculator.calculate(formula) );
     }
 }
