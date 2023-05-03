@@ -60,8 +60,7 @@ public class ParserForm {
         // création des champs de saisi
         this.columnsToParse = new TextField();
 
-        this.columnsToParse.setPromptText("Numéro des colonnes à traiter séparés d'une virgule");
-        this.columnsToParse.getStyleClass().add("");
+        this.columnsToParse.setPromptText("Numéro des colonnes à traiter (en partant de 1) séparés avec :");
         VBox.setMargin(this.columnsToParse,new Insets(20,0,20,0) );
 
         this.columnsFormula = new TextField();
@@ -117,5 +116,13 @@ public class ParserForm {
 
     public File getSelectedFile(){
         return this.file;
+    }
+
+    public String getColumnsToParse(){
+        return this.columnsToParse.getText();
+    }
+
+    public String getColumnsFormula(){
+        return this.columnsFormula.getText();
     }
 }

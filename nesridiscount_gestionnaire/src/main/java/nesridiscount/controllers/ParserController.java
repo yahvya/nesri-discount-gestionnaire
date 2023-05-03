@@ -110,7 +110,7 @@ public class ParserController extends Controller {
 
             try{
 
-                PriceFileParser parser = new PriceFileParser(selectedFile);
+                PriceFileParser parser = new PriceFileParser(selectedFile,form.getColumnsToParse(),form.getColumnsFormula() );
 
                 parser.setToDoOnSuccess(() -> {
                     Platform.runLater(() -> {
