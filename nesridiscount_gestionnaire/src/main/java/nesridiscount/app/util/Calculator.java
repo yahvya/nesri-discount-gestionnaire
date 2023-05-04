@@ -13,81 +13,66 @@ import java.util.regex.Pattern;
  */
 public abstract class Calculator {
     /**
-     * calcule une formule sous forme de chaine
+     * calcule le résultat d'une formule
      * @param formula
-     * @return le résultat
+     * @return le résultat du calcul ou null
      */
     public static Double calculate(String formula){
-        Set<Entry<Character,Operator> > entries = Operator.operators.entrySet();
+        // recherche et gestion des éléments entre parenthèses
+        Matcher matcher = Pattern.compile("\\(.*\\)").matcher(formula);
 
-        String operatorsRegex = "";
-        String prioOperatorsRegex = "";
+        // gestion des parenthèses contenu dans le formule
+        while(matcher.find() ){
+            String match = matcher.group();
 
-        // construction de la regex vérifiant la présence d'opérateur
-        for(Map.Entry<Character,Operator> entry : entries ) {
-            String quote = Pattern.quote(String.valueOf(entry.getKey() ) );
+            String matchWithtoutParenthese = match.substring(1,match.length() - 1);
 
-            operatorsRegex += quote + "|";
-
-            Operator operator = entry.getValue();
-
-            if(operator.isSuperPrioritor || operator.isPrioritor)
-                prioOperatorsRegex += quote + "|";
+            formula = formula.replaceAll(Pattern.quote(match),BigDecimal.valueOf(Calculator.calculate(matchWithtoutParenthese) ).toPlainString() );
         }
-
-        int len = operatorsRegex.length();
-
-        if(len > 0)
-            operatorsRegex = operatorsRegex.substring(0,len - 1);
-        
-        len = prioOperatorsRegex.length();
-
-        if(len > 0)
-            prioOperatorsRegex = prioOperatorsRegex.substring(0,len - 1);
-
-        double result = 0;
 
         formula = formula.replaceAll("\\s","");
 
-        // tant qu'un opérateur est présdent
-        while(Pattern.compile(operatorsRegex).matcher(formula).find() ){
-            // gestion des opérateurs super prioritaire
-            for(Map.Entry<Character,Operator> entry : entries){
-                Operator operator = entry.getValue();
+        Set<Entry<Character,Operator> > entries = Operator.operators.entrySet();
 
-                if(operator.isSuperPrioritor) formula = Calculator.placeParenthesesAroundAndCalculate(entry.getKey(),formula,operator.calculator);
-            }
-            
-            // gestion des opérateurs prioritaires
-            for(Map.Entry<Character,Operator> entry : entries){
-                Operator operator = entry.getValue();
+        // gestion des opérateurs super prioritaire
+        for(Map.Entry<Character,Operator> entry : entries){
+            Operator operator = entry.getValue();
 
-                if(operator.isPrioritor) formula = Calculator.placeParenthesesAroundAndCalculate(entry.getKey(),formula,operator.calculator);
-            }
+            if(operator.isSuperPrioritor) formula = Calculator.calculateValue(entry.getKey(),formula,operator.calculator);
+        }
+        
+        // gestion des opérateurs prioritaires
+        for(Map.Entry<Character,Operator> entry : entries){
+            Operator operator = entry.getValue();
 
-            if(!Pattern.compile(prioOperatorsRegex).matcher(formula).find() ){
-                // gestion des opérateurs restant
-                for(Map.Entry<Character,Operator> entry : entries){
-                    Operator operator = entry.getValue();
-
-                    if(!operator.isSuperPrioritor && !operator.isPrioritor) formula = Calculator.placeParenthesesAroundAndCalculate(entry.getKey(),formula,operator.calculator);
-                }
-            }
+            if(operator.isPrioritor) formula = Calculator.calculateValue(entry.getKey(),formula,operator.calculator);
         }
 
-        return result;
+        // gestion des opérateurs restant
+        for(Map.Entry<Character,Operator> entry : entries){
+            Operator operator = entry.getValue();
+
+            if(!operator.isSuperPrioritor && !operator.isPrioritor) formula = Calculator.calculateValue(entry.getKey(),formula,operator.calculator);
+        }
+
+        try{
+            return Double.parseDouble(formula);
+        }
+        catch(Exception e){
+            return null;
+        }
     }
 
     /**
-     * place des parenthès autour des occurences du symbole passé et fais le calcul
+     * calcul les valeurs liés à une formule
      * @param operatorSymbol
-     * @param formula
-     * @return la formule changée
+     * @param simpleFormula
+     * @return la formule modifié
      */
-    private static String placeParenthesesAroundAndCalculate(char operatorSymbol,String formula,OperatorCalc calculator){
+    private static String calculateValue(Character operatorSymbol,String simpleFormula,OperatorCalc calculator){
         String symbol = Pattern.quote(String.valueOf(operatorSymbol) );
 
-        Matcher matcher = Pattern.compile("([0-9\\.]+" + symbol + "[0-9\\.]+" + "(" + symbol +"[0-9\\.]+)*)").matcher(formula);
+        Matcher matcher = Pattern.compile("([0-9\\.]+" + symbol + "[0-9\\.]+" + "(" + symbol +"[0-9\\.]+)*)").matcher(simpleFormula);
 
         // remplacement des valeurs trouvés
         while(matcher.find() ){
@@ -109,19 +94,10 @@ public abstract class Calculator {
                 catch(Exception e){}
             }
 
-            formula = formula.replaceAll(Pattern.quote(match),result == null ? "0" : BigDecimal.valueOf(result).toPlainString() );
+            simpleFormula = simpleFormula.replaceAll(Pattern.quote(match),result == null ? "0" : BigDecimal.valueOf(result).toPlainString() );
         }
 
-        // suppression des parenthèses simple
-        matcher = Pattern.compile("\\([0-9\\.]+\\)").matcher(formula);
-
-        while(matcher.find() ){
-            String match = matcher.group();
-
-            formula = formula.replace(match,match.replace("(","").replace(")","") );
-        }
-            
-        return formula;
+        return simpleFormula;
     }
 
     /**

@@ -60,11 +60,11 @@ public class Session {
     public static void save(){
         Timestamp now = Timestamp.from(Instant.now() );
 
-        JSONObject saveObject = new JSONObject(Map.of(
-            "username",Session.username,
-            "password",Session.password,
-            "loginTime", now.toString()
-        ) );
+        JSONObject saveObject = new JSONObject(){{
+            put("username",Session.username);
+            put("password",Session.password);
+            put("loginTime",now.toString() );
+        }};
 
         try{
             // sauvegarde du fichier
