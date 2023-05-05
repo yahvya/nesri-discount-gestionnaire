@@ -9,6 +9,7 @@ module nesridiscount {
 
     opens nesridiscount.models.model to javafx.base;
     opens nesridiscount.controllers to javafx.fxml;
+
     exports nesridiscount;
     exports nesridiscount.app.util;
 }

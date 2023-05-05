@@ -56,7 +56,7 @@ public class ParserController extends Controller {
         FileChooser chooser = new FileChooser();
 
         chooser.setTitle("Choisissez le fichier");
-        chooser.getExtensionFilters().add(new ExtensionFilter("Extensions supportés","*.csv","*.xlxs") );
+        chooser.getExtensionFilters().add(new ExtensionFilter("Extensions supportés","*.csv") );
         chooser.setInitialDirectory(FileSystemView.getFileSystemView().getDefaultDirectory() );
 
         File choosedFile = chooser.showOpenDialog(App.getStage() );

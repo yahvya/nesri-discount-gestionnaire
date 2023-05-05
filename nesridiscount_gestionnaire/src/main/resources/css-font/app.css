@@ -99,3 +99,14 @@
 .bordered{
     -fx-border-color: -fx-border;
 }
+
+.radio-button{
+    -fx-cursor: hand;
+}
+
+.choice-box,.choice-box .context-menu{
+    -fx-border-color: -fx-border;
+    -fx-background-color: -fx-upp-bg;
+    -fx-color: -fx-special;
+    -fx-cursor: hand;
+}

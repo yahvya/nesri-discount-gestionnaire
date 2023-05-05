@@ -49,7 +49,7 @@ public class AppController extends Controller{
 
     @FXML
     void switchToAddPieces(MouseEvent event) {
-
+        Controller.switchToPage("add-pieces");
     }
 
     @FXML

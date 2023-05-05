@@ -20,7 +20,7 @@ import nesridiscount.app.util.Disappear;
  */
 public class ParserForm {
     private VBox container;
-    private VBox parent;
+    private VBox form;
 
     private TextField columnsToParse;
     private TextField columnsFormula;
@@ -69,14 +69,14 @@ public class ParserForm {
 
         // création du conteneur formulaire
 
-        this.parent = new VBox(0,new Node[]{pathLine,this.columnsToParse,this.columnsFormula});
+        this.form = new VBox(0,new Node[]{pathLine,this.columnsToParse,this.columnsFormula});
 
-        this.parent.getStyleClass().add("form");
-        this.parent.setPadding(new Insets(0,0,0,10) );
+        this.form.getStyleClass().add("form");
+        this.form.setPadding(new Insets(0,0,0,10) );
 
-        VBox.setMargin(this.parent,new Insets(15,0,20,20) );
+        VBox.setMargin(this.form,new Insets(15,0,20,20) );
 
-        return this.parent;
+        return this.form;
     }
 
     /**
@@ -85,8 +85,8 @@ public class ParserForm {
      * @return this
      */
     public ParserForm delete(boolean execToDo){
-        Disappear.disappear(this.parent,() -> {
-            this.container.getChildren().remove(this.parent); 
+        Disappear.disappear(this.form,() -> {
+            this.container.getChildren().remove(this.form); 
         
             if(this.toDoOnErase != null && execToDo){
                 try{
@@ -111,7 +111,7 @@ public class ParserForm {
     }
 
     public VBox getParent(){
-        return this.parent;
+        return this.form;
     }
 
     public File getSelectedFile(){

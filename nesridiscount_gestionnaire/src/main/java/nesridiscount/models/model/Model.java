@@ -104,6 +104,18 @@ public abstract class Model {
     }
 
     /**
+     * crée le model
+     * @return si la création à réussi
+     */
+    public boolean create(){
+        return false;
+    }
+
+    public HashMap<String,ColumnManager> getColumnsManagers(){
+        return this.columnsManagers;
+    }
+
+    /**
      * cherche des enfants 
      * @param map
      * @return le modèle crée ou null
@@ -154,6 +166,30 @@ public abstract class Model {
 
         return resultsList;
     }   
+
+    /**
+     * requete custom
+     * @param toGet
+     * @param query
+     * @return les résultats ou null
+     */
+    public static ResultSet customResultQuery(Class<? extends Model>toGet,String query){
+        try{
+            Model model = toGet.getConstructor().newInstance();
+
+            // remplacement du nom de la table
+            query = query.replaceAll(toGet.getSimpleName(),model.tableName);
+
+            // remplacement des attributs par non de colonne
+            for(String key : model.columnsManagers.keySet() )
+                query = query.replaceAll(key,model.columnsManagers.get(key).getLinkedColName() );
+
+            return Model.getConnection().createStatement().executeQuery(query);
+        }
+        catch(Exception e){
+            return null;
+        }
+    }
 
     /**
      * 

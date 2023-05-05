@@ -1,6 +1,7 @@
 package nesridiscount.app.util;
 
 import java.io.File;
+import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,9 +44,7 @@ public class PriceFileParser extends Thread{
             if(this.toParse.getName().endsWith("csv") )
                 this.parseCsv();
             else
-                this.parseXlxs();   
-
-            System.out.println(this.csvContent);
+                throw new Exception();
 
             this.toDoOnSuccess.doAction();
         }
@@ -111,14 +110,6 @@ public class PriceFileParser extends Thread{
         finally{
             if(scanner != null) scanner.close();
         }
-    }
-
-    /**
-     * parse le fichier par xlxs
-     * @throws Exception en cas d'échec
-     */
-    private void parseXlxs() throws Exception{
-
     }
 
     /**
@@ -216,9 +207,6 @@ public class PriceFileParser extends Thread{
      * @throws Exception en cas d'erreur lors du parse
      */
     private String parseFormula(String[] linesData,String formula) throws Exception{
-        // ajout de parenthèses autour du calcul pour l'algorithme parenthèse
-        formula = "(" + formula + ")";
-
         // recherche et remplacement des valeurs de colonne dans la formule
         Matcher matcher = Pattern.compile("\\[[0-9]+\\]").matcher(formula);
         
@@ -233,6 +221,6 @@ public class PriceFileParser extends Thread{
                 continue;
         }
 
-        return Double.toString(Calculator.calculate(formula) );
+        return BigDecimal.valueOf(Calculator.calculate(formula) ).toPlainString();
     }
 }

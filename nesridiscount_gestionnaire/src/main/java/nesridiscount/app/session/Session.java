@@ -7,8 +7,6 @@ import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
-import java.util.Map;
-
 import org.json.simple.JSONObject;
 
 import nesridiscount.App;
@@ -60,6 +58,7 @@ public class Session {
     public static void save(){
         Timestamp now = Timestamp.from(Instant.now() );
 
+        @SuppressWarnings("unchecked")
         JSONObject saveObject = new JSONObject(){{
             put("username",Session.username);
             put("password",Session.password);

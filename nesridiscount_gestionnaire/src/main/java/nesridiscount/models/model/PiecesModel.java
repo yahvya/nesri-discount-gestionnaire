@@ -30,10 +30,9 @@ public class PiecesModel extends Model{
         super();
     }
 
-    public PiecesModel(int id, int quantity, String pieceName, String enterpriseName, String externalRef, String internalRef, String location) throws Exception{
+    public PiecesModel(int quantity, String pieceName, String enterpriseName, String externalRef, String internalRef, String location) throws Exception{
         super();
         
-        this.id = id;
         this.quantity = quantity;
         this.pieceName = pieceName;
         this.enterpriseName = enterpriseName;

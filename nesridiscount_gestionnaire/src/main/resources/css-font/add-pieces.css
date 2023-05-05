@@ -1,0 +1,17 @@
+.page-title{
+    -fx-font-weight: bold;
+    -fx-font-size: 18px;
+}
+
+.new-form{
+    -fx-background-color: -fx-upp-bg;
+    -fx-padding: 20px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-font-size: 13px;
+}
+
+.bordered{
+    -fx-border-color: -fx-border;
+    -fx-padding: 5px;
+}

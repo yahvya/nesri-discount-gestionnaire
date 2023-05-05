@@ -176,5 +176,16 @@ public abstract class Calculator {
         public static void registerOperator(char sign,OperatorCalc calcultator,boolean isPrioritor){
             Operator.operators.put(sign,new Operator(calcultator,isPrioritor,sign) );
         }
+
+        /**
+         * enregistre un opérateur dans la liste des opérateurs géré
+         * @param sign
+         * @param calcultator
+         * @param isPrioritor
+         * @param isSuperPrioritor
+         */
+        public static void registerOperator(char sign,OperatorCalc calcultator,boolean isPrioritor,boolean isSuperPrioritor){
+            Operator.operators.put(sign,new Operator(calcultator,isPrioritor,sign,isSuperPrioritor) );
+        }
     }
 }
