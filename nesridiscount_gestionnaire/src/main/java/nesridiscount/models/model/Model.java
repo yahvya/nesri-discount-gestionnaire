@@ -108,6 +108,8 @@ public abstract class Model {
      * @return si la création à réussi
      */
     public boolean create(){
+        
+
         return false;
     }
 

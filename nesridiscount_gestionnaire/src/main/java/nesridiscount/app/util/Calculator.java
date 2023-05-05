@@ -11,15 +11,17 @@ import java.util.regex.Pattern;
 /**
  * gestion du calcul d'une formule sous forme de chaine
  */
-public abstract class Calculator {
+public abstract class Calculator{
     /**
      * calcule le résultat d'une formule
      * @param formula
      * @return le résultat du calcul ou null
      */
     public static Double calculate(String formula){
+        formula = formula.replaceAll("\\s","");
+
         // recherche et gestion des éléments entre parenthèses
-        Matcher matcher = Pattern.compile("\\(.*\\)").matcher(formula);
+        Matcher matcher = Pattern.compile("\\([^\\(][^\\)]*\\)").matcher(formula);
 
         // gestion des parenthèses contenu dans le formule
         while(matcher.find() ){
@@ -30,7 +32,7 @@ public abstract class Calculator {
             formula = formula.replaceAll(Pattern.quote(match),BigDecimal.valueOf(Calculator.calculate(matchWithtoutParenthese) ).toPlainString() );
         }
 
-        formula = formula.replaceAll("\\s","");
+        if(Pattern.compile("\\(").matcher(formula).find() ) return Calculator.calculate(formula);
 
         Set<Entry<Character,Operator> > entries = Operator.operators.entrySet();
 
