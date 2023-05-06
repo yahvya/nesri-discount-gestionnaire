@@ -5,25 +5,25 @@ import nesridiscount.models.util.Table;
 
 @Table("pieces")
 public class PiecesModel extends Model{
-    @Column(linkedCol = "id")
+    @Column(isAutoIncrement = true,linkedCol = "id")
     public int id;
 
-    @Column(linkedCol = "quantity")
+    @Column(isAutoIncrement = false,linkedCol = "quantity")
     public int quantity;   
 
-    @Column(linkedCol = "piece_name")
+    @Column(isAutoIncrement = false,linkedCol = "piece_name")
     public String pieceName;
 
-    @Column(linkedCol = "enterprise_name")
+    @Column(isAutoIncrement = false,linkedCol = "enterprise_name")
     public String enterpriseName;
 
-    @Column(linkedCol = "external_ref")
+    @Column(isAutoIncrement = false,linkedCol = "external_ref")
     public String externalRef;
 
-    @Column(linkedCol = "internal_ref")
+    @Column(isAutoIncrement = false,linkedCol = "internal_ref")
     public String internalRef;
 
-    @Column(linkedCol = "location")
+    @Column(isAutoIncrement = false,linkedCol = "location")
     public String location;
 
     public PiecesModel() throws Exception{

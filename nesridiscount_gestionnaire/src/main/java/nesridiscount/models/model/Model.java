@@ -2,6 +2,7 @@ package nesridiscount.models.model;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.math.BigDecimal;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -29,6 +30,8 @@ public abstract class Model {
 
     private HashMap<String,ColumnManager> columnsManagers;
 
+    private int countOfAutoIncrementedElements = 0;
+
     public Model() throws Exception{
         try{
             // récupération des informations sur la table
@@ -43,7 +46,11 @@ public abstract class Model {
             for(Field f : fields){
                 Column columnAttribute = f.getAnnotation(Column.class);
 
-                if(columnAttribute != null) this.columnsManagers.put(f.getName(),new ColumnManager(f,columnAttribute,this) );
+                if(columnAttribute != null){
+                    this.columnsManagers.put(f.getName(),new ColumnManager(f,columnAttribute,this) );
+                    
+                    if(columnAttribute.isAutoIncrement() ) this.countOfAutoIncrementedElements++;
+                }
             }
         }
         catch(Exception e){
@@ -108,9 +115,54 @@ public abstract class Model {
      * @return si la création à réussi
      */
     public boolean create(){
-        
+        try{
+            int countOfElements = this.columnsManagers.size() - this.countOfAutoIncrementedElements;
 
-        return false;
+            String cols[] = new String[countOfElements];
+            Object toInsert[] = new Object[countOfElements];
+
+            int index = 0;
+
+            for(ColumnManager manager : this.columnsManagers.values() ){
+                if(!manager.getColumnAttribute().isAutoIncrement() ){
+                    cols[index] = manager.getLinkedColName();
+                    toInsert[index] = manager.getField().get(this);
+
+                    index++;
+                }
+            }
+
+            String sqlQuery = "insert into " + this.tableName + " (" + String.join(", ",cols) + ") values(" + String.join(",","?".repeat(countOfElements).split("") ) + ")";
+
+            PreparedStatement query = Model.getConnection().prepareStatement(sqlQuery);
+
+            index = 1;
+
+            for(Object toAdd : toInsert){
+                Class<?> toAddClass = toAdd.getClass();
+
+                System.out.println(toAddClass);
+                
+                if(toAddClass == String.class)
+                    query.setString(index,(String) toAdd);
+                else if(toAddClass == Integer.class)
+                    query.setInt(index,(Integer) toAdd);
+                else if(toAddClass == Long.class || toAddClass == Double.class)
+                    query.setBigDecimal(index,BigDecimal.valueOf((Double) toAdd) );
+                else 
+                    continue;
+                
+                index++;
+            }
+
+            query.executeUpdate();
+
+            return true;
+        }   
+        catch(Exception e){
+            return false;
+        }
+
     }
 
     public HashMap<String,ColumnManager> getColumnsManagers(){

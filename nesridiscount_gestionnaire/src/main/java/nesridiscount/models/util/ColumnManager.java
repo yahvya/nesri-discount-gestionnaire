@@ -45,6 +45,10 @@ public class ColumnManager{
         }
     }
 
+    public Column getColumnAttribute(){
+        return this.columnAttribute;
+    }
+
     public Field getField(){
         return this.linkedField;
     }

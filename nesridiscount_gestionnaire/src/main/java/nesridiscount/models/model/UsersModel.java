@@ -7,16 +7,16 @@ import nesridiscount.models.util.Table;
 
 @Table("users")
 public class UsersModel extends Model{
-    @Column(linkedCol = "id")
+    @Column(isAutoIncrement = true,linkedCol = "id")
     public int id;
 
-    @Column(linkedCol = "username")
+    @Column(isAutoIncrement = false,linkedCol = "username")
     public String username;
 
-    @Column(linkedCol = "password")
+    @Column(isAutoIncrement = false,linkedCol = "password")
     public String password;
 
-    @Column(linkedCol = "role")
+    @Column(isAutoIncrement = false,linkedCol = "role")
     public int role;
 
     public UsersModel() throws Exception{
