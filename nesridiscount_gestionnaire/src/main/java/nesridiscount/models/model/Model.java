@@ -140,8 +140,6 @@ public abstract class Model {
 
             for(Object toAdd : toInsert){
                 Class<?> toAddClass = toAdd.getClass();
-
-                System.out.println(toAddClass);
                 
                 if(toAddClass == String.class)
                     query.setString(index,(String) toAdd);
