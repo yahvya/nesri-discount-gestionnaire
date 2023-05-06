@@ -18,7 +18,7 @@
                <children>
                   <BorderPane prefHeight="62.0" prefWidth="599.0">
                      <left>
-                        <Label styleClass="page-title" text="Traiter vos fichiers de prix" BorderPane.alignment="CENTER">
+                        <Label styleClass="page-title" text="TRAITER VOS FICHIERS PRIX" BorderPane.alignment="CENTER">
                            <BorderPane.margin>
                               <Insets />
                            </BorderPane.margin>

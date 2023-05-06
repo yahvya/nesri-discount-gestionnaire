@@ -110,3 +110,8 @@
     -fx-color: -fx-special;
     -fx-cursor: hand;
 }
+
+.page-title{
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}

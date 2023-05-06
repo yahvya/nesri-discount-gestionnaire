@@ -74,7 +74,7 @@ public class AppController extends Controller{
 
     @FXML
     void switchToCalendar(MouseEvent event) {
-
+        Controller.switchToPage("mission-calendar");
     }
 
     @FXML
