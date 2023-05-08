@@ -55,8 +55,19 @@
     -fx-cursor: hand;
 }
 
-.text-field {
+.text-area{
+    -fx-display-caret: true;
+    -fx-background-insets: 0;
+    -fx-background-color: -fx-upp-bg;
+    -fx-border-radius: 5px;
+}
+
+.text-field,.text-area .content{
     -fx-background-color: -fx-border,-fx-upp-bg;
+}
+
+.text-area .content{
+    -fx-border-color: -fx-border;
 }
 
 .check-box .box{

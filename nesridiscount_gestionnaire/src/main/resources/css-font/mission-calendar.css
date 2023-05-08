@@ -48,3 +48,30 @@
     -fx-font-weight: bold;
     -fx-underline: true;
 }
+
+.add-form{
+
+}
+
+.calendar-grid > *{
+    -fx-border-color: -fx-upp-bg;
+    -fx-background-color: -fx-upp-bg;
+    -fx-cursor: hand;
+}
+
+.date-picker > .text-field {
+    -fx-text-fill: -fx-text-color;
+}
+
+.date-picker-popup > .month-year-pane {
+    -fx-base: -fx-upp-bg;
+    -fx-mark-highlight-color: -fx-special-color;
+}
+
+.date-picker:editable > .arrow-button,.calendar-grid,.date-picker > .text-field{
+    -fx-background-color: -fx-upp-bg;
+}
+
+.date-picker:editable > .arrow-button > *,.date-picker-popup > .month-year-pane .button > *{
+    -fx-background-color: -fx-icon;
+}
