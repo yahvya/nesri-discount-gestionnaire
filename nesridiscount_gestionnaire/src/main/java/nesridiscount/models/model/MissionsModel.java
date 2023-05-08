@@ -22,10 +22,9 @@ public class MissionsModel extends Model{
         super();
     }
 
-    public MissionsModel(int id, String description, String moment, String technician) throws Exception{
+    public MissionsModel(String description, String moment, String technician) throws Exception{
         super();
 
-        this.id = id;
         this.description = description;
         this.moment = moment;
         this.technician = technician;

@@ -1,6 +1,7 @@
 module nesridiscount {
     requires transitive json.simple;
     requires transitive javafx.controls;
+    requires tornadofx.controls;
     requires javafx.fxml;
     requires java.sql;
     requires spring.security.crypto;

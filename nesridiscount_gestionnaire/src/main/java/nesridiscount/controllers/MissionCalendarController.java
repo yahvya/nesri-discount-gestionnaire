@@ -9,9 +9,12 @@ import java.util.Locale;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import nesridiscount.app.process.SearchMissionProcess;
+import nesridiscount.app.ui_util.MissionForm;
+import nesridiscount.app.ui_util.UiAlert;
 import nesridiscount.models.model.MissionsModel;
 
 public class MissionCalendarController {
@@ -45,6 +48,8 @@ public class MissionCalendarController {
 
     private SearchMissionProcess searchMissionsProcess;
 
+    private ArrayList<MissionForm> missions;
+
     @FXML
     void searchMission(MouseEvent event) {
         try{
@@ -57,12 +62,65 @@ public class MissionCalendarController {
 
     @FXML
     void createNewMissions(MouseEvent event){
+        if(this.missions.size() == 0){
+            UiAlert.newAlert(AlertType.INFORMATION,"Echec de création","Il n'y a aucune mission à créer actuellement").show();
+            
+            return;
+        }
 
+        ArrayList<MissionsModel> toCreate = new ArrayList<>(); 
+
+        int index = 1;
+
+        // récupération des model
+        for(MissionForm form : this.missions){
+            MissionsModel missionModel = form.getMission();
+
+            index++;
+
+            if(missionModel == null){
+                UiAlert.newAlert(
+                    AlertType.INFORMATION,
+                    "Echec de création",
+                    "La mission numéro (" + Integer.toString(index) + ") est mal formé"
+                ).show();
+                
+                continue;
+            }
+
+            toCreate.add(missionModel);
+            
+            form.delete();
+        }
+
+        for(MissionsModel model : toCreate){
+            if(!model.create() ){
+                UiAlert.newAlert(
+                    AlertType.INFORMATION,
+                    "Echec de création",
+                    String.join(" ",
+                        "Une erreur technique s'est produite lors de la mission (",
+                        model.technician,
+                        "-",
+                        model.moment,
+                        ")"
+                    )
+                ).show();
+
+                index++;
+            }
+        }
     }
 
     @FXML
     void addNewMissions(MouseEvent event){
-        
+        MissionForm form = new MissionForm(this.newMissionsContainer);
+
+        form.setToDoOnDelete(() -> this.missions.remove(form) );
+
+        this.missions.add(0,form);
+
+        this.newMissionsContainer.getChildren().add(form.createForm() );
     }
 
     @FXML
@@ -132,6 +190,8 @@ public class MissionCalendarController {
         this.searchMissionsProcess = new SearchMissionProcess();
 
         this.searchMissionsProcess.setAfterEnd(() -> this.showMissionsSearchResult() );
+
+        this.missions = new ArrayList<>();
     }
 
     /**
