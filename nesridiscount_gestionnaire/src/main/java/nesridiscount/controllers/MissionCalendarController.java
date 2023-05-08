@@ -3,6 +3,7 @@ package nesridiscount.controllers;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.TextStyle;
+import java.util.ArrayList;
 import java.util.Locale;
 
 import javafx.fxml.FXML;
@@ -10,9 +11,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import nesridiscount.app.process.SearchMissionProcess;
+import nesridiscount.models.model.MissionsModel;
 
 public class MissionCalendarController {
-
     @FXML
     private VBox container;
 
@@ -41,9 +43,16 @@ public class MissionCalendarController {
 
     private int currentYear;
 
+    private SearchMissionProcess searchMissionsProcess;
+
     @FXML
     void searchMission(MouseEvent event) {
-
+        try{
+            this.searchMissionsProcess
+                .setSearch(this.searchbar.getText() )
+                .execEntireProcess();
+        }
+        catch(Exception e){}
     }
 
     @FXML
@@ -119,6 +128,10 @@ public class MissionCalendarController {
         this.setResultFromDate();
 
         this.container.getChildren().remove(this.resultContainer);
+
+        this.searchMissionsProcess = new SearchMissionProcess();
+
+        this.searchMissionsProcess.setAfterEnd(() -> this.showMissionsSearchResult() );
     }
 
     /**
@@ -132,5 +145,16 @@ public class MissionCalendarController {
         this.monthlabel.setText(month);
 
         this.resultDataLabel.setText(String.join(" ","Résultats",month,year) );
+    }
+
+    /**
+     * affiche les résultats de la recherche
+     */
+    private void showMissionsSearchResult(){
+        ArrayList<MissionsModel> results = this.searchMissionsProcess.getResults();
+
+        System.out.println("affichage des résultats");
+
+        for(MissionsModel resultModel : results) System.out.println(resultModel.description);
     }
 }

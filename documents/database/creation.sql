@@ -17,3 +17,11 @@ CREATE TABLE users(
    PRIMARY KEY(id),
    UNIQUE(username)
 );
+
+CREATE TABLE missions(
+   id INTEGER,
+   description TEXT NOT NULL,
+   moment TEXT NOT NULL,
+   technician TEXT NOT NULL,
+   PRIMARY KEY(id)
+);
