@@ -10,7 +10,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
-import javafx.scene.layout.VBox;
 import nesridiscount.app.util.Action;
 import nesridiscount.app.util.Disappear;
 import nesridiscount.models.model.MissionsModel;
@@ -90,8 +89,11 @@ public class MissionSearchResult {
                 if(newModel != null){
                     newModel.id = this.resultModel.id;
 
-                    if(newModel.update("id") )
+                    if(newModel.update("id") ){
+                        this.resultModel = newModel;
+                        
                         MissionSearchResult.updateSuccessAlert.show();
+                    }
                     else
                         MissionSearchResult.updateFailAlert.show();
                 }
@@ -118,5 +120,9 @@ public class MissionSearchResult {
         },Duration.millis(400) );
 
         return this;
+    }
+
+    public MissionsModel getResultModel(){
+        return this.resultModel;
     }
 }

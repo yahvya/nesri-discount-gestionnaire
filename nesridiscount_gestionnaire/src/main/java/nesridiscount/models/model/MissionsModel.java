@@ -32,4 +32,23 @@ public class MissionsModel extends Model{
         this.moment = moment;
         this.technician = technician;
     }
+
+    @Override
+    public String toString(){
+        return String.join(",",
+            Integer.toString(this.id),
+            this.technician,
+            this.moment,
+            this.description
+        );
+    } 
+
+    public static String toStringHeader(){
+        return String.join(",",
+            "Id",
+            "Technicien",
+            "Date de la mission",
+            "Description"
+        );
+    }
 }

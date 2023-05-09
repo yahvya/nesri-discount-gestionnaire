@@ -18,6 +18,7 @@ import nesridiscount.app.process.SearchMissionProcess;
 import nesridiscount.app.ui_util.MissionForm;
 import nesridiscount.app.ui_util.MissionSearchResult;
 import nesridiscount.app.ui_util.UiAlert;
+import nesridiscount.app.util.FileExporter;
 import nesridiscount.models.model.MissionsModel;
 
 public class MissionCalendarController {
@@ -177,6 +178,18 @@ public class MissionCalendarController {
 
             return;
         }
+
+        // création du contenu csv
+        String csvContent = MissionsModel.toStringHeader() + "\n";
+
+        for(MissionSearchResult result : this.results) csvContent += result.getResultModel().toString() + "\n";
+
+        UiAlert.newAlert(
+            AlertType.INFORMATION,
+            "Export des résultats",
+            FileExporter.export(csvContent,"*.csv") ? 
+                "Votre fichier a bien été sauvegardé" : 
+                "Echec d'enregistrement du fichier").show();
     }
 
     @FXML
