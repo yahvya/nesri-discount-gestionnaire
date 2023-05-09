@@ -37,7 +37,7 @@ public class SearchMissionProcess extends Process{
 
             this.conditions[index] = new Condition<String>("technician",like,Type.LIKE,Separator.OR);
             this.conditions[index + 1] = new Condition<String>("description",like,Type.LIKE,Separator.OR);
-            this.conditions[index + 2] = new Condition<String>("moment",part,Separator.OR);
+            this.conditions[index + 2] = new Condition<String>("moment",like,Type.LIKE,Separator.OR);
             
             index += COUNT_OF_CONDITIONS_PER_PART;
         }

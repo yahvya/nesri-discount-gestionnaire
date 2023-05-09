@@ -1,5 +1,7 @@
 package nesridiscount.models.model;
 
+import java.time.format.DateTimeFormatter;
+
 import nesridiscount.models.util.Column;
 import nesridiscount.models.util.Table;
 
@@ -17,6 +19,7 @@ public class MissionsModel extends Model{
     @Column(linkedCol = "technician",isAutoIncrement = false)
     public String technician;
 
+    public static final DateTimeFormatter momentFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     public MissionsModel() throws Exception {
         super();

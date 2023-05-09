@@ -1,10 +1,9 @@
 package nesridiscount.app.ui_util;
 
-import java.time.format.DateTimeFormatter;
-
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import nesridiscount.app.util.Action;
@@ -20,11 +19,15 @@ public class MissionForm {
 
     private VBox form;
 
+    private HBox buttonsRow;
+
     private TextField technicianName;
     
     private TextArea missionDescription;
 
     private DateTimePicker missionDate;
+
+    private Button deleteButton;
 
     private Action toDoOnDelete = null;
 
@@ -39,7 +42,7 @@ public class MissionForm {
     public VBox createForm(){
         this.technicianName = new TextField();
 
-        this.technicianName.setPromptText("Entrez le nom du technician");
+        this.technicianName.setPromptText("Entrez le nom du technicien");
         this.technicianName.setPrefWidth(320);
         this.technicianName.setPrefHeight(40);
 
@@ -54,11 +57,13 @@ public class MissionForm {
 
         this.missionDate.setPromptText("Date et heure de l'intervation");
 
-        Button deleteButton = new Button("Supprimer");
+        this.deleteButton = new Button("Supprimer");
 
-        deleteButton.setOnMouseClicked((e) -> this.delete() );
+        this.deleteButton.setOnMouseClicked((e) -> this.delete() );
 
-        this.form = new VBox(30,deleteButton,this.technicianName,this.missionDate,this.missionDescription);
+        this.buttonsRow = new HBox(10,this.deleteButton);
+
+        this.form = new VBox(30,this.buttonsRow,this.technicianName,this.missionDate,this.missionDescription);
 
         return this.form;
     }
@@ -80,6 +85,26 @@ public class MissionForm {
         return this;
     }
 
+    public TextField getTechnicianNameField(){
+        return this.technicianName;
+    }
+
+    public TextArea getMissionDescriptionField(){
+        return this.missionDescription;
+    }
+
+    public DateTimePicker getMissionDatePicker(){
+        return this.missionDate;
+    }
+
+    public HBox getButtonsRow(){
+        return this.buttonsRow;
+    }
+
+    public Button getDeleteButton(){
+        return this.deleteButton;
+    }
+
     /**
      * crée le model à partir du formulaire
      * @return le model crée ou null en cas d'échec
@@ -96,7 +121,7 @@ public class MissionForm {
             try{
                 model = new MissionsModel(
                     missionDescription,
-                    this.missionDate.getDateTimeValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm") ),
+                    this.missionDate.getDateTimeValue().format(MissionsModel.momentFormatter),
                     technicianName
                 );
             }

@@ -6,7 +6,9 @@ import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
@@ -14,6 +16,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import nesridiscount.app.process.SearchMissionProcess;
 import nesridiscount.app.ui_util.MissionForm;
+import nesridiscount.app.ui_util.MissionSearchResult;
 import nesridiscount.app.ui_util.UiAlert;
 import nesridiscount.models.model.MissionsModel;
 
@@ -50,6 +53,8 @@ public class MissionCalendarController {
 
     private ArrayList<MissionForm> missions;
 
+    private ArrayList<MissionSearchResult> results;
+
     @FXML
     void searchMission(MouseEvent event) {
         try{
@@ -63,7 +68,7 @@ public class MissionCalendarController {
     @FXML
     void createNewMissions(MouseEvent event){
         if(this.missions.size() == 0){
-            UiAlert.newAlert(AlertType.INFORMATION,"Echec de création","Il n'y a aucune mission à créer actuellement").show();
+            UiAlert.newAlert(AlertType.ERROR,"Echec de création","Il n'y a aucune mission à créer actuellement").show();
             
             return;
         }
@@ -80,7 +85,7 @@ public class MissionCalendarController {
 
             if(missionModel == null){
                 UiAlert.newAlert(
-                    AlertType.INFORMATION,
+                    AlertType.ERROR,
                     "Echec de création",
                     "La mission numéro (" + Integer.toString(index) + ") est mal formé"
                 ).show();
@@ -96,7 +101,7 @@ public class MissionCalendarController {
         for(MissionsModel model : toCreate){
             if(!model.create() ){
                 UiAlert.newAlert(
-                    AlertType.INFORMATION,
+                    AlertType.ERROR,
                     "Echec de création",
                     String.join(" ",
                         "Une erreur technique s'est produite lors de la mission (",
@@ -167,12 +172,18 @@ public class MissionCalendarController {
 
     @FXML
     void exportResults(MouseEvent event) {
+        if(this.results.size() == 0){
+            UiAlert.newAlert(AlertType.ERROR,"Echec d'export","Il n'y a aucun résultat à exporter").show();
 
+            return;
+        }
     }
 
     @FXML
     void removeResults(MouseEvent event) {
-
+        // suppression des précédents résultats
+        this.results.forEach(result -> result.delete() );
+        this.results.clear();
     }
 
     @FXML
@@ -185,13 +196,12 @@ public class MissionCalendarController {
 
         this.setResultFromDate();
 
-        this.container.getChildren().remove(this.resultContainer);
-
         this.searchMissionsProcess = new SearchMissionProcess();
 
         this.searchMissionsProcess.setAfterEnd(() -> this.showMissionsSearchResult() );
 
         this.missions = new ArrayList<>();
+        this.results = new ArrayList<>();
     }
 
     /**
@@ -211,10 +221,19 @@ public class MissionCalendarController {
      * affiche les résultats de la recherche
      */
     private void showMissionsSearchResult(){
-        ArrayList<MissionsModel> results = this.searchMissionsProcess.getResults();
+        this.removeResults(null);
 
-        System.out.println("affichage des résultats");
+        ObservableList<Node> children = this.resultContainer.getChildren();
 
-        for(MissionsModel resultModel : results) System.out.println(resultModel.description);
+        // création et affichage des résultats
+        for(MissionsModel result : this.searchMissionsProcess.getResults() ){
+            MissionSearchResult searchResult = new MissionSearchResult(this.resultContainer,result);
+
+            searchResult.setToDoOnDelete(() -> this.results.remove(searchResult) );
+            
+            children.add(searchResult.createResult() );
+            
+            this.results.add(searchResult);
+        }
     }
 }

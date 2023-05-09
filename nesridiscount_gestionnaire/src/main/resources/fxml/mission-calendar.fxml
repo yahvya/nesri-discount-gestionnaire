@@ -18,25 +18,25 @@
    <center>
       <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <content>
-            <VBox fx:id="container" prefHeight="611.0" prefWidth="738.0" spacing="20.0">
+            <VBox fx:id="container" prefHeight="611.0" prefWidth="921.0" spacing="20.0">
                <children>
                   <Label styleClass="page-title" text="CALENDRIER DES MISSIONS">
                      <VBox.margin>
                         <Insets top="15.0" />
                      </VBox.margin>
                   </Label>
-                  <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="30.0">
-                     <VBox.margin>
-                        <Insets top="40.0" />
-                     </VBox.margin>
+                  <VBox fx:id="resultContainer" prefWidth="900.0" spacing="20.0">
                      <children>
-                        <TextField fx:id="searchbar" focusTraversable="false" prefHeight="30.0" prefWidth="478.0" promptText="Rechercher une mission" />
-                        <Button mnemonicParsing="false" onMouseClicked="#searchMission" styleClass="search-button" text="Recherher" />
-                     </children>
-                  </HBox>
-                  <VBox fx:id="resultContainer" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
-                     <children>
-                        <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                        <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="30.0">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                           <children>
+                              <TextField fx:id="searchbar" focusTraversable="false" prefHeight="30.0" prefWidth="478.0" promptText="Rechercher une mission" />
+                              <Button mnemonicParsing="false" onMouseClicked="#searchMission" styleClass="search-button" text="Recherher" />
+                           </children>
+                        </HBox>
+                        <HBox prefWidth="200.0" spacing="20.0">
                            <children>
                               <Button mnemonicParsing="false" onMouseClicked="#removeResults" text="Effacer les résultats" />
                               <Button mnemonicParsing="false" onMouseClicked="#exportResults" text="Exporter les résultats" />
@@ -46,70 +46,74 @@
                            </VBox.margin>
                         </HBox>
                      </children>
+                     <styleClass>
+                        <String fx:value="bordered" />
+                        <String fx:value="result" />
+                     </styleClass>
                   </VBox>
-                  <HBox prefWidth="200.0" spacing="30.0">
-                     <children>
-                        <HBox alignment="CENTER_LEFT" spacing="15.0">
-                           <children>
-                              <Button mnemonicParsing="false" onMousePressed="#showPreviousYear">
-                                 <graphic>
-                                    <FontAwesomeIconView styleClass="icon" text="" />
-                                 </graphic>
-                                 <tooltip>
-                                    <Tooltip text="Année précédente" />
-                                 </tooltip>
-                              </Button>
-                              <Label fx:id="yearLabel" prefHeight="19.0" prefWidth="42.0" styleClass="month" text="2020" />
-                              <Button mnemonicParsing="false" onMousePressed="#showNextYear" prefHeight="26.0" prefWidth="21.0">
-                                 <graphic>
-                                    <FontAwesomeIconView styleClass="icon" text="" />
-                                 </graphic>
-                                 <tooltip>
-                                    <Tooltip text="Année suivante" />
-                                 </tooltip>
-                              </Button>
-                           </children>
-                           <styleClass>
-                              <String fx:value="period-filter" />
-                              <String fx:value="bordered" />
-                           </styleClass>
-                        </HBox>
-                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="40.0" prefWidth="175.0" spacing="15.0">
-                           <children>
-                              <Button mnemonicParsing="false" onMousePressed="#showPreviousMonth">
-                                 <graphic>
-                                    <FontAwesomeIconView styleClass="icon" text="" />
-                                 </graphic>
-                                 <tooltip>
-                                    <Tooltip text="Mois précédent" />
-                                 </tooltip>
-                              </Button>
-                              <Label fx:id="monthlabel" prefHeight="19.0" prefWidth="89.0" styleClass="month" text="JANVIER" />
-                              <Button mnemonicParsing="false" onMousePressed="#showNextMonth" prefHeight="26.0" prefWidth="21.0">
-                                 <graphic>
-                                    <FontAwesomeIconView styleClass="icon" text="" />
-                                 </graphic>
-                                 <tooltip>
-                                    <Tooltip text="Mois suivant" />
-                                 </tooltip>
-                              </Button>
-                           </children>
-                           <styleClass>
-                              <String fx:value="period-filter" />
-                              <String fx:value="bordered" />
-                           </styleClass>
-                        </HBox>
-                     </children>
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
-                  </HBox>
                   <AnchorPane />
                   <VBox fx:id="calendarContainer" prefHeight="341.0" prefWidth="718.0" spacing="20.0">
                      <VBox.margin>
-                        <Insets top="5.0" />
+                        <Insets />
                      </VBox.margin>
                      <children>
+                        <HBox prefWidth="200.0" spacing="30.0">
+                           <children>
+                              <HBox alignment="CENTER_LEFT" spacing="15.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" onMousePressed="#showPreviousYear">
+                                       <graphic>
+                                          <FontAwesomeIconView styleClass="icon" text="" />
+                                       </graphic>
+                                       <tooltip>
+                                          <Tooltip text="Année précédente" />
+                                       </tooltip>
+                                    </Button>
+                                    <Label fx:id="yearLabel" prefHeight="19.0" prefWidth="42.0" styleClass="month" text="2020" />
+                                    <Button mnemonicParsing="false" onMousePressed="#showNextYear" prefHeight="26.0" prefWidth="21.0">
+                                       <graphic>
+                                          <FontAwesomeIconView styleClass="icon" text="" />
+                                       </graphic>
+                                       <tooltip>
+                                          <Tooltip text="Année suivante" />
+                                       </tooltip>
+                                    </Button>
+                                 </children>
+                                 <styleClass>
+                                    <String fx:value="period-filter" />
+                                    <String fx:value="bordered" />
+                                 </styleClass>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="40.0" prefWidth="175.0" spacing="15.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" onMousePressed="#showPreviousMonth">
+                                       <graphic>
+                                          <FontAwesomeIconView styleClass="icon" text="" />
+                                       </graphic>
+                                       <tooltip>
+                                          <Tooltip text="Mois précédent" />
+                                       </tooltip>
+                                    </Button>
+                                    <Label fx:id="monthlabel" prefHeight="19.0" prefWidth="89.0" styleClass="month" text="JANVIER" />
+                                    <Button mnemonicParsing="false" onMousePressed="#showNextMonth" prefHeight="26.0" prefWidth="21.0">
+                                       <graphic>
+                                          <FontAwesomeIconView styleClass="icon" text="" />
+                                       </graphic>
+                                       <tooltip>
+                                          <Tooltip text="Mois suivant" />
+                                       </tooltip>
+                                    </Button>
+                                 </children>
+                                 <styleClass>
+                                    <String fx:value="period-filter" />
+                                    <String fx:value="bordered" />
+                                 </styleClass>
+                              </HBox>
+                           </children>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </HBox>
                         <Label fx:id="resultDataLabel" prefHeight="35.0" prefWidth="246.0" text="Résultats Janvier 2020">
                            <styleClass>
                               <String fx:value="bordered" />
@@ -193,16 +197,25 @@
                         <String fx:value="calendar" />
                      </styleClass>
                   </VBox>
-                  <HBox prefWidth="200.0" spacing="20.0">
-                     <children>
-                        <Button mnemonicParsing="false" onMouseClicked="#addNewMissions" text="Ajouter une mission au calendrier" />
-                        <Button mnemonicParsing="false" onMouseClicked="#createNewMissions" text="Confirmer l'ajout des missions" />
-                     </children>
-                  </HBox>
-                  <VBox fx:id="newMissionsContainer" prefHeight="200.0" prefWidth="100.0" spacing="30.0">
+                  <VBox fx:id="newMissionsContainer" prefHeight="104.0" prefWidth="900.0" spacing="30.0">
                      <VBox.margin>
-                        <Insets bottom="50.0" />
+                        <Insets bottom="30.0" top="20.0" />
                      </VBox.margin>
+                     <children>
+                        <HBox prefWidth="200.0" spacing="20.0">
+                           <children>
+                              <Button mnemonicParsing="false" onMouseClicked="#addNewMissions" text="Ajouter une mission au calendrier" />
+                              <Button mnemonicParsing="false" onMouseClicked="#createNewMissions" text="Confirmer l'ajout des missions" />
+                           </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                     <styleClass>
+                        <String fx:value="result" />
+                        <String fx:value="bordered" />
+                     </styleClass>
                   </VBox>
                </children>
                <styleClass>

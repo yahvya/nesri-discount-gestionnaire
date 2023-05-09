@@ -84,7 +84,7 @@ public class ParserController extends Controller {
         this.toWait = this.forms.size();
 
         if(this.toWait == 0){
-            UiAlert.newAlert(AlertType.INFORMATION,"Pas de fichier trouvé","Il n'y a aucun fichier à traiter").show();
+            UiAlert.newAlert(AlertType.ERROR,"Pas de fichier trouvé","Il n'y a aucun fichier à traiter").show();
 
             return;
         }

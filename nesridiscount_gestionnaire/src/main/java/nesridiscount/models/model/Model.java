@@ -59,6 +59,45 @@ public abstract class Model {
     }
 
     /**
+     * supprime le model en base de donnée
+     * @param where les clés attributs de conditions à utilisé
+     * @return si la suppression à bien réussi
+     */
+    public boolean delete(String... where){
+        try{
+            String request = "delete from " + this.tableName;
+            
+            if(where.length != 0){
+                request += " where ";
+
+                for(String attributeName : where) request += this.columnsManagers.get(attributeName).getLinkedColName() + " = ? and ";
+
+                request = request.substring(0,request.length() - 4);
+            }
+
+            PreparedStatement preparedQuery = Model.getConnection().prepareStatement(request);
+
+            int index = 1;
+
+            // bind des conditions where
+            if(where.length != 0){
+                for(String attributeName : where){
+                    Model.setValueInQuery(preparedQuery,this.columnsManagers.get(attributeName).getField(),this,index);
+                    
+                    index++;
+                }
+            }
+
+            preparedQuery.executeUpdate();
+
+            return true;
+        }
+        catch(Exception e){}
+
+        return false;
+    }
+
+    /**
      * met à jour le model en base de donnée
      * @param where les clés attributs de conditions à utilisé
      * @return si la mise à jour a réussi

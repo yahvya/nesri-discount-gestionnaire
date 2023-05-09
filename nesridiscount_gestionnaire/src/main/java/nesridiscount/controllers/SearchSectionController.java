@@ -75,7 +75,7 @@ public class SearchSectionController extends Controller{
         
         // vérification d'existance de résultats
         if(items.size() == 0){
-            UiAlert.newAlert(AlertType.INFORMATION,"Echec d'export","Il n'y a aucun résultat à exporter").show();
+            UiAlert.newAlert(AlertType.ERROR,"Echec d'export","Il n'y a aucun résultat à exporter").show();
 
             return;
         }

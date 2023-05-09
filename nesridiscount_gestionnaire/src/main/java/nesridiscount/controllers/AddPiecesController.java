@@ -49,7 +49,7 @@ public class AddPiecesController {
 
             if(model == null){
                 UiAlert.newAlert(
-                    AlertType.INFORMATION,
+                    AlertType.ERROR,
                     "Echec de création",
                     "La pièce numéro (" + Integer.toString(index) + ") est mal formé"
                 ).show();
@@ -65,7 +65,7 @@ public class AddPiecesController {
         for(PiecesModel model : toCreate){
             if(!model.create() ){
                 UiAlert.newAlert(
-                    AlertType.INFORMATION,
+                    AlertType.ERROR,
                     "Echec de création",
                     String.join(" ","Une erreur technique s'est produite lors de la création de la pièce (",model.getPieceName(),")")
                 ).show();
