@@ -26,11 +26,13 @@ public class ParametersController {
 
     private VBox currentSectionContent;
 
+    private Label activeLabel;
+
     private static Alert sectionLoadingFailAlert = UiAlert.newAlert(AlertType.ERROR,"Erreur de chargement","Une erreur s'est produite lors du chargement de la section");
 
     @FXML
     void switchToCreateAccount(MouseEvent event) {
-        this.switchToSection(ParameterSection.CREATE_ACCOUNT,"parameter-create-account-section");
+        this.switchToSection(ParameterSection.CREATE_ACCOUNT,"parameter-create-account-section",this.createAccountLabel);
     }
 
     @FXML
@@ -41,6 +43,7 @@ public class ParametersController {
     @FXML
     void initialize(){
         this.currentSectionContent = null;
+        this.activeLabel = this.createAccountLabel;
 
         this.switchToCreateAccount(null);
     }
@@ -49,8 +52,9 @@ public class ParametersController {
      * supprime la section actuellement affiché et affiche la nouvelle section
      * @param section
      * @param fxml
+     * @param linkedLabel
      */
-    private void switchToSection(ParameterSection section,String fxml){
+    private void switchToSection(ParameterSection section,String fxml,Label linkedLabel){
         if(section == this.currentSection) return;
 
         Parent loadedSectionParent = App.loadFXML(fxml);
@@ -70,6 +74,10 @@ public class ParametersController {
         this.currentSectionContent = loadedSection;
         
         children.add(loadedSection);
+
+        this.activeLabel.getStyleClass().remove("active");
+        this.activeLabel = linkedLabel;
+        this.activeLabel.getStyleClass().add("active");
     }
 
     /**

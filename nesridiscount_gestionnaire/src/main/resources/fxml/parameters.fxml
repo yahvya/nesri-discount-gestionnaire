@@ -19,7 +19,7 @@
                </styleClass>
                <children>
                   <Label styleClass="page-title" text="Paramètres" />
-                  <HBox prefWidth="579.0" spacing="5.0" styleClass="navbar">
+                  <HBox prefWidth="579.0" spacing="15.0" styleClass="navbar">
                      <children>
                         <Label fx:id="createAccountLabel" onMouseClicked="#switchToCreateAccount" styleClass="active" text="Créer un compte" />
                         <Label fx:id="manageAccountLabel" onMouseClicked="#switchToManageAccount" text="Gérer les comptes" />
