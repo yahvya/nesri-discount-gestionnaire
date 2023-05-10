@@ -18,3 +18,7 @@
     -fx-cursor: hand;
     -fx-text-fill: -fx-special;
 }
+
+.parameter-section{
+    -fx-background-color: -fx-bg;
+}

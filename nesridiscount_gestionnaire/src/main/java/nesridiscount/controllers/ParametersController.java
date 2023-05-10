@@ -13,7 +13,7 @@ public class ParametersController {
 
     @FXML
     void switchToCreateAccount(MouseEvent event) {
-
+        
     }
 
     @FXML
