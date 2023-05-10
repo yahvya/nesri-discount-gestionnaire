@@ -49,6 +49,10 @@
     -fx-underline: true;
 }
 
+.result-see:hover{
+    -fx-text-fill: -fx-special;
+}
+
 .calendar-grid > *{
     -fx-border-color: -fx-upp-bg;
     -fx-background-color: -fx-upp-bg;

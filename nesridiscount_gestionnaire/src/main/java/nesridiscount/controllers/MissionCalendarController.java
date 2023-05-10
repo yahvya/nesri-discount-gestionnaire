@@ -3,7 +3,6 @@ package nesridiscount.controllers;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
-import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -44,6 +43,9 @@ public class MissionCalendarController {
 
     @FXML
     private VBox resultContainer;
+    
+    @FXML
+    private VBox calendarResultContainer;
 
     @FXML
     private Label resultDataLabel;
@@ -124,6 +126,9 @@ public class MissionCalendarController {
                 index++;
             }
         }
+
+        // rafrachissement du mois
+        this.setResultFromDate();
     }
 
     @FXML
@@ -259,7 +264,7 @@ public class MissionCalendarController {
 
             int countOfDaysInMonth = this.currentMonth.length(false);
 
-            ObservableList<Node> children = this.resultContainer.getChildren();
+            ObservableList<Node> children = this.calendarResultContainer.getChildren();
             
             children.clear();
 
@@ -281,7 +286,13 @@ public class MissionCalendarController {
                     seeLabel.getStyleClass().add("result-see");
                     seeLabel.setTooltip(new Tooltip("Voir les mission de ce jour") );
                     seeLabel.setOnMouseClicked((e) -> {
+                        // remplacement des résultats de recherche par les résultats actuelles
+                        ArrayList<MissionsModel> currentSearchResults = this.searchMissionsProcess.getResults();
 
+                        currentSearchResults.clear();
+                        currentSearchResults.addAll(foundedMissions);
+
+                        this.showMissionsSearchResult();
                     });
 
                     resultBox.getChildren().add(seeLabel);
