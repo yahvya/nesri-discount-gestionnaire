@@ -293,6 +293,9 @@ public class MissionCalendarController {
                         currentSearchResults.addAll(foundedMissions);
 
                         this.showMissionsSearchResult();
+
+                        // scroll sur le haut de page
+                        Controller.pane.setVvalue(0);
                     });
 
                     resultBox.getChildren().add(seeLabel);

@@ -19,7 +19,7 @@ public abstract class Controller {
     @FXML
     protected BorderPane parent;
 
-    private static ScrollPane pane;
+    protected static ScrollPane pane;
 
     private static HashMap<String,Parent> pages = new HashMap<>();
 
