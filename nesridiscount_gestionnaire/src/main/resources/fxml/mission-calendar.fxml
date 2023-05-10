@@ -172,25 +172,7 @@
                               <Insets top="15.0" />
                            </VBox.margin>
                         </HBox>
-                        <HBox prefWidth="200.0" spacing="30.0">
-                           <children>
-                              <HBox alignment="CENTER" prefWidth="100.0" spacing="20.0">
-                                 <children>
-                                    <Label text="1" />
-                                    <Label styleClass="result-see" text="Voir">
-                                       <tooltip>
-                                          <Tooltip text="Voir les rendez vous du jour" />
-                                       </tooltip>
-                                    </Label>
-                                 </children>
-                                 <styleClass>
-                                    <String fx:value="bordered" />
-                                    <String fx:value="period-filter" />
-                                    <String fx:value="good-result" />
-                                 </styleClass>
-                              </HBox>
-                           </children>
-                        </HBox>
+                        <VBox fx:id="resultContainer" prefWidth="100.0" spacing="20.0" />
                      </children>
                      <styleClass>
                         <String fx:value="bordered" />

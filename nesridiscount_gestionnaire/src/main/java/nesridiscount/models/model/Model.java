@@ -26,11 +26,11 @@ import nesridiscount.models.util.Table;
 public abstract class Model {
     private static Connection con = null;
 
-    private String tableName;
+    protected String tableName;
 
-    private HashMap<String,ColumnManager> columnsManagers;
+    protected HashMap<String,ColumnManager> columnsManagers;
 
-    private int countOfAutoIncrementedElements = 0;
+    protected int countOfAutoIncrementedElements = 0;
 
     public Model() throws Exception{
         try{

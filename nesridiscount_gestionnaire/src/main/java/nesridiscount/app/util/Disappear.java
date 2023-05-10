@@ -22,7 +22,6 @@ public class Disappear {
         animation.setFromValue(1.0);
         animation.setToValue(0.0);
         animation.setCycleCount(1);
-        // animation.setAutoReverse(true);
         animation.setOnFinished((e) -> {
             if(toDoAfter != null){
                 try{

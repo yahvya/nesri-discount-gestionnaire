@@ -1,18 +1,24 @@
 package nesridiscount.controllers;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.Month;
+import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Locale;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import nesridiscount.app.process.SearchMissionProcess;
 import nesridiscount.app.ui_util.MissionForm;
@@ -22,6 +28,8 @@ import nesridiscount.app.util.FileExporter;
 import nesridiscount.models.model.MissionsModel;
 
 public class MissionCalendarController {
+    private static final Alert failAlert = UiAlert.newAlert(AlertType.ERROR,"Echec d'actualisation","Une erreur s'est produite lors de l'actualisation du calendrier des missions");
+
     @FXML
     private VBox container;
 
@@ -220,7 +228,83 @@ public class MissionCalendarController {
     /**
      * rafraichi les résultats en fonction de la date choisis
      */
-    private void setResultFromDate(){
+    private void setResultFromDate(){        
+        // récupération des missions du mois donné
+        ArrayList<MissionsModel> results = MissionsModel.getMissionsOf(this.currentMonth,this.currentYear);
+
+        if(results == null){
+            MissionCalendarController.failAlert.show();
+            
+            return;
+        }
+
+        // suppression des résultats précédents et affichage des résultats
+        try{    
+            // récupération des résultats
+            HashMap<Integer,ArrayList<MissionsModel> > daysMap = new HashMap<>();
+
+            results.forEach(missionModel -> {
+                int day = LocalDateTime.parse(missionModel.moment,MissionsModel.momentFormatter).getDayOfMonth();
+
+                ArrayList<MissionsModel> dayResusltList = daysMap.get(day);
+
+                if(dayResusltList == null){
+                    dayResusltList = new ArrayList<>();
+
+                    daysMap.put(day,dayResusltList);
+                }
+
+                dayResusltList.add(missionModel);
+            });
+
+            int countOfDaysInMonth = this.currentMonth.length(false);
+
+            ObservableList<Node> children = this.resultContainer.getChildren();
+            
+            children.clear();
+
+            HBox daysLine = new HBox(30);
+
+            children.add(daysLine);
+
+            // affichage des jours du mois
+            for(int dayNumber = 1; dayNumber <= countOfDaysInMonth; dayNumber++){
+                ArrayList<MissionsModel> foundedMissions = daysMap.get(dayNumber);
+
+                Label dayLabel = new Label(Integer.toString(dayNumber) );
+
+                HBox resultBox = new HBox(20,dayLabel);
+
+                if(foundedMissions != null){
+                    Label seeLabel = new Label("Voir");
+
+                    seeLabel.getStyleClass().add("result-see");
+                    seeLabel.setTooltip(new Tooltip("Voir les mission de ce jour") );
+                    seeLabel.setOnMouseClicked((e) -> {
+
+                    });
+
+                    resultBox.getChildren().add(seeLabel);
+                }
+
+                resultBox.setPrefWidth(100);
+                resultBox.getStyleClass().addAll("bordered","period-filter","good-result");
+
+                daysLine.getChildren().add(resultBox);
+
+                if(dayNumber % 7 == 0){
+                    daysLine = new HBox(30);
+
+                    children.add(daysLine);
+                }
+            }
+        }
+        catch(Exception e){
+            MissionCalendarController.failAlert.show();
+
+            return;
+        }
+
         String month = this.currentMonth.getDisplayName(TextStyle.FULL,Locale.FRANCE).toUpperCase();
         String year = Integer.toString(this.currentYear);
 
