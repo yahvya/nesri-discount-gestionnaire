@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nesridiscount.controllers.ParametersController">
+   <center>
+      <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <content>
+            <VBox fx:id="pageContainer" prefHeight="200.0" prefWidth="100.0" spacing="30.0">
+               <styleClass>
+                  <String fx:value="parent" />
+                  <String fx:value="container" />
+               </styleClass>
+               <children>
+                  <Label styleClass="page-title" text="Paramètres" />
+                  <HBox prefWidth="579.0" spacing="5.0" styleClass="navbar">
+                     <children>
+                        <Label onMouseClicked="#switchToCreateAccount" styleClass="active" text="Créer un compte" />
+                        <Label onMouseClicked="#switchToManageAccount" text="Gérer les comptes" />
+                     </children>
+                  </HBox>
+               </children></VBox>
+         </content>
+      </ScrollPane>
+   </center>
+   <stylesheets>
+      <URL value="@../css-font/app.css" />
+      <URL value="@../css-font/parameters.css" />
+   </stylesheets>
+</BorderPane>

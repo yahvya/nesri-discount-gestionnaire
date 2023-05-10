@@ -64,7 +64,7 @@ public class AppController extends Controller{
 
     @FXML
     void switchToParameters(MouseEvent event) {
-
+        Controller.switchToPage("parameters");
     }
 
     @FXML
@@ -99,7 +99,12 @@ public class AppController extends Controller{
             toShow = "parser";
         }
 
-        if(userRole != Role.Admin) children.remove(this.calendarLabel);
+        if(userRole != Role.Admin){
+            children.removeAll(
+                this.calendarLabel,
+                this.parametersLabel
+            );
+        }
 
         Controller.setPane(this.toReplace);
         Controller.switchToPage(toShow,keepPage);
