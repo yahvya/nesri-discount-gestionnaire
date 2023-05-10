@@ -90,12 +90,16 @@ public class MissionSearchResult {
                     newModel.id = this.resultModel.id;
 
                     if(newModel.update("id") ){
+                        this.resultModel.id = newModel.id;
+                        this.resultModel.description = newModel.description;
+                        this.resultModel.moment = newModel.moment;
+                        this.resultModel.technician = newModel.technician;
+
                         this.resultModel = newModel;
-                        
-                        MissionSearchResult.updateSuccessAlert.show();
+
+                        MissionSearchResult.updateSuccessAlert.show();  
                     }
-                    else
-                        MissionSearchResult.updateFailAlert.show();
+                    else MissionSearchResult.updateFailAlert.show();
                 }
                 else badFormAlert.show();
             }
