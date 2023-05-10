@@ -64,7 +64,7 @@ public class App extends Application {
     /**
      * charge un fichier fxml
      * @param fxmlFilename nom du fichier fxml
-     * @return
+     * @return le parent chargé ou null
      */
     public static Parent loadFXML(String fxmlFilename){
         try{
