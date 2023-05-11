@@ -27,8 +27,8 @@ public class UsersModel extends Model{
         super();
         
         this.username = username;
-        this.password = BCrypt.hashpw(password,BCrypt.gensalt() );
         this.role = role;
+        this.setPassword(password);
     }
 
     /**
@@ -38,5 +38,11 @@ public class UsersModel extends Model{
      */
     public boolean checkPassword(String password){
         return BCrypt.checkpw(password, this.password);
+    }
+
+    public UsersModel setPassword(String password){
+        this.password = BCrypt.hashpw(password,BCrypt.gensalt() );
+        
+        return this;
     }
 }

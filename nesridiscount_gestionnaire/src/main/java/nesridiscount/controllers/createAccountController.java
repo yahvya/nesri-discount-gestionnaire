@@ -31,7 +31,7 @@ public class CreateAccountController {
 
     private ToggleGroup choiceButtons;
 
-    @FXML
+    @FXML   
     void createAccount(MouseEvent event) {
         String username = this.username.getText();
         String password = this.password.getText();

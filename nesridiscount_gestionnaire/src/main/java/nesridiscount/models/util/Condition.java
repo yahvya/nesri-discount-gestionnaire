@@ -63,6 +63,10 @@ public class Condition<T> {
                     condString = columnName + " like ?";
                 break;
 
+                case NOT_EQUAL:
+                    condString = columnName + " != ?";
+                ; break;
+
                 default:
                     condString = columnName + " = ?";
                 break;
@@ -77,6 +81,10 @@ public class Condition<T> {
                 case INFERIOR: 
                     condString = columnName + " < ?";
                 break;
+
+                case NOT_EQUAL:
+                    condString = columnName + " != ?";
+                ; break;
 
                 default:
                     condString = columnName + " = ?";
@@ -128,6 +136,7 @@ public class Condition<T> {
     public enum Type{
         EQUAL,
         LIKE,
+        NOT_EQUAL,
         /**
          * la valeur en base de données est supérieure
          */

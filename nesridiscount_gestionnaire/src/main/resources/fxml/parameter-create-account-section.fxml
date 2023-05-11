@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
 <VBox fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="30.0" styleClass="parameter-section" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nesridiscount.controllers.CreateAccountController">
    <children>
       <Label text="En continuant vous créez un nouvel accès à l'application">
@@ -22,7 +21,7 @@
       <HBox prefHeight="18.0" prefWidth="590.0" spacing="20.0">
          <children>
             <Label text="Choisissez le rôle de l'utilisateur" />
-            <RadioButton fx:id="adminChoice" mnemonicParsing="false" text="Administrateur">
+            <RadioButton fx:id="adminChoice" mnemonicParsing="false" text="Admin">
                <tooltip>
                   <Tooltip text="Ce rôle possède tous les droits sur l'application" />
                </tooltip>
@@ -32,7 +31,7 @@
                   <Tooltip text="Ce rôle possède tous les droits hors gestion des missions et des comptes" />
                </tooltip>
             </RadioButton>
-            <RadioButton fx:id="limitedChoice" layoutX="319.0" layoutY="10.0" mnemonicParsing="false" text="Limité">
+            <RadioButton fx:id="limitedChoice" layoutX="319.0" layoutY="10.0" mnemonicParsing="false" text="Inter">
                <tooltip>
                   <Tooltip text="Ce rôle possède tous les droits hors gestion des missions et des comptes" />
                </tooltip>

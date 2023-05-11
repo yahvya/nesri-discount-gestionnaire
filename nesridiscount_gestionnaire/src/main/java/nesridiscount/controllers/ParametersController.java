@@ -37,7 +37,7 @@ public class ParametersController {
 
     @FXML
     void switchToManageAccount(MouseEvent event) {
-        // this.switchToSection(ParameterSection.MANAGE_ACCOUNT,"");
+        this.switchToSection(ParameterSection.MANAGE_ACCOUNT,"parameter-manage-account-section",this.manageAccountLabel);
     }
 
     @FXML
