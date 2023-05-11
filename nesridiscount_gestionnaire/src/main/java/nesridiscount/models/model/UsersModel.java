@@ -23,10 +23,9 @@ public class UsersModel extends Model{
         super();
     }
 
-    public UsersModel(int id, String username, String password, int role) throws Exception {
+    public UsersModel(String username, String password, int role) throws Exception {
         super();
         
-        this.id = id;
         this.username = username;
         this.password = BCrypt.hashpw(password,BCrypt.gensalt() );
         this.role = role;

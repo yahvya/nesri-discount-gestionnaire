@@ -10,15 +10,15 @@
 <?import javafx.scene.layout.VBox?>
 
 
-<VBox fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="30.0" styleClass="parameter-section" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nesridiscount.controllers.createAccountController">
+<VBox fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="30.0" styleClass="parameter-section" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nesridiscount.controllers.CreateAccountController">
    <children>
       <Label text="En continuant vous créez un nouvel accès à l'application">
          <VBox.margin>
             <Insets bottom="5.0" />
          </VBox.margin>
       </Label>
-      <TextField fx:id="username" prefHeight="30.0" prefWidth="400.0" promptText="Nom d'utilisateur" />
-      <TextField fx:id="password" prefHeight="30.0" prefWidth="400.0" promptText="Mot de passe de l'utilisateur" />
+      <TextField fx:id="username" prefHeight="30.0" prefWidth="400.0" promptText="Nom d'utilisateur (1 à 50 caractères)" />
+      <TextField fx:id="password" prefHeight="30.0" prefWidth="400.0" promptText="Mot de passe de l'utilisateur (8 à 30 caractères)" />
       <HBox prefHeight="18.0" prefWidth="590.0" spacing="20.0">
          <children>
             <Label text="Choisissez le rôle de l'utilisateur" />
