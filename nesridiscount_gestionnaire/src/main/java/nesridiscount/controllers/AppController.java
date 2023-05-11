@@ -59,7 +59,7 @@ public class AppController extends Controller{
 
     @FXML
     void switchToHelp(MouseEvent event) {
-
+        Controller.switchToPage("help",true);
     }
 
     @FXML
