@@ -33,7 +33,7 @@
             </RadioButton>
             <RadioButton fx:id="limitedChoice" layoutX="319.0" layoutY="10.0" mnemonicParsing="false" text="Inter">
                <tooltip>
-                  <Tooltip text="Ce rôle possède tous les droits hors gestion des missions et des comptes" />
+                  <Tooltip text="Ce rôle possède les plus faible droit" />
                </tooltip>
             </RadioButton>
          </children>

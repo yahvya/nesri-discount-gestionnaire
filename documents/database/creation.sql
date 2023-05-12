@@ -25,3 +25,11 @@ CREATE TABLE missions(
    technician TEXT NOT NULL,
    PRIMARY KEY(id)
 );
+
+CREATE TABLE help_categories(
+   id INTEGER,
+   category_name TEXT NOT NULL,
+   help_content TEXT NOT NULL,
+   PRIMARY KEY(id),
+   UNIQUE(category_name)
+);

@@ -17,6 +17,11 @@
             <version>1.0.6</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-web</artifactId>
+            <version>19.0.2</version>
+        </dependency>
 
         <dependency>
             <groupId>com.googlecode.json-simple</groupId>

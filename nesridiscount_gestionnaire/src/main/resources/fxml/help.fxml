@@ -5,15 +5,17 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.web.WebView?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css-font/app.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nesridiscount.controllers.HelpController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="677.0" prefWidth="600.0" stylesheets="@../css-font/app.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nesridiscount.controllers.HelpController">
    <center>
       <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <content>
-            <VBox prefHeight="200.0" prefWidth="100.0" spacing="25.0" styleClass="parent">
+            <VBox prefHeight="504.0" prefWidth="599.0" spacing="25.0" styleClass="parent">
                <children>
                   <Label styleClass="page-title" text="Trouvez de l'aide" />
                   <ChoiceBox fx:id="subjectChooser" prefHeight="34.0" prefWidth="270.0" />
+                  <WebView fx:id="sectionViewer" prefHeight="570.0" prefWidth="599.0" />
                </children></VBox>
          </content>
       </ScrollPane>
