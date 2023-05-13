@@ -26,11 +26,17 @@ public class PiecesModel extends Model{
     @Column(isAutoIncrement = false,linkedCol = "location")
     public String location;
 
+    @Column(isAutoIncrement = false,linkedCol = "sell_price")
+    public double sellPrice;
+
+    @Column(isAutoIncrement = false,linkedCol = "buy_price")
+    public double buyPrice;
+
     public PiecesModel() throws Exception{
         super();
     }
 
-    public PiecesModel(int quantity, String pieceName, String enterpriseName, String externalRef, String internalRef, String location) throws Exception{
+    public PiecesModel(int quantity, String pieceName, String enterpriseName, String externalRef, String internalRef, String location,double buyPrice,double sellPrice) throws Exception{
         super();
         
         this.quantity = quantity;
@@ -39,6 +45,8 @@ public class PiecesModel extends Model{
         this.externalRef = externalRef;
         this.internalRef = internalRef;
         this.location = location;
+        this.buyPrice = buyPrice;
+        this.sellPrice = sellPrice;
     }
 
     public void setId(int id) {
@@ -63,6 +71,21 @@ public class PiecesModel extends Model{
         this.location = location;
     }
 
+    public void setBuyPrice(double buyPrice){
+        this.buyPrice = buyPrice;
+    }
+
+    public void setSellPrice(double sellPrice){
+        this.sellPrice = sellPrice;
+    }
+
+    public double getBuyPrice(){
+        return this.buyPrice;
+    }
+
+    public double getSellPrice(){
+        return this.sellPrice;
+    }
 
     public int getId() {
         return this.id;
@@ -101,7 +124,9 @@ public class PiecesModel extends Model{
             this.internalRef,
             this.externalRef,
             this.enterpriseName,
-            this.location
+            this.location,
+            Double.toString(this.buyPrice),
+            Double.toString(this.sellPrice)
         );
     }
 
@@ -113,7 +138,9 @@ public class PiecesModel extends Model{
             "Référence interne",
             "Référence fabriquant",
             "Nom fabriquant",
-            "Emplacement"
+            "Emplacement",
+            "Prix achat",
+            "Prix vente"
         );
     }
 }

@@ -42,6 +42,8 @@ public class UsersModel extends Model{
 
     public UsersModel setPassword(String password){
         this.password = BCrypt.hashpw(password,BCrypt.gensalt() );
+
+        System.out.println("motdepasse : " + this.password);
         
         return this;
     }

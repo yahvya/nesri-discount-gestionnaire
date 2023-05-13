@@ -6,6 +6,8 @@ CREATE TABLE pieces(
    internal_ref TEXT NOT NULL,
    location TEXT NOT NULL,
    quantity INTEGER NOT NULL,
+   buy_price NUMERIC(15,2)   NOT NULL,
+   sell_price NUMERIC(15,2)   NOT NULL,
    PRIMARY KEY(id)
 );
 
@@ -33,3 +35,4 @@ CREATE TABLE help_categories(
    PRIMARY KEY(id),
    UNIQUE(category_name)
 );
+insert into users values(1,'nesrialex','$2a$10$qM2UW8iGECq2xttH2sFOM.NxJXGZ7Lj5Jf5O8enVqnhb5WjG5iTwu',1);

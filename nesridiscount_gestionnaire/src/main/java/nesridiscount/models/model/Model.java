@@ -357,6 +357,8 @@ public abstract class Model {
                 query.setInt(paramIndex,(Integer) toSet);
             else if(toSet instanceof Long)
                 query.setLong(paramIndex,(Long) toSet);
+            else if(toSet instanceof Double)
+                query.setDouble(paramIndex,(Double) toSet);
             else if(toSet instanceof String)
                 query.setString(paramIndex,(String) toSet);
         }

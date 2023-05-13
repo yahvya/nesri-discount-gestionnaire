@@ -58,6 +58,12 @@ public class SearchSectionController extends Controller{
     private TableColumn<String,String> resultPieceName;
 
     @FXML
+    private TableColumn<String,Double> resultSellPrice;
+    
+    @FXML
+    private TableColumn<String,Double> resultBuyPrice;
+
+    @FXML
     private TextField searchbar;
 
     private SearchPiecesProcess searchProcess;
@@ -206,6 +212,30 @@ public class SearchSectionController extends Controller{
     }
 
     @FXML
+    void editSellPrice(TableColumn.CellEditEvent<PiecesModel,Double> event){
+        Double newPrice = event.getNewValue();
+        
+        if(event.getOldValue() != newPrice){
+            PiecesModel model = event.getRowValue();
+
+            model.setSellPrice(newPrice);
+            model.update("id");
+        }
+    }
+
+    @FXML
+    void editBuyPrice(TableColumn.CellEditEvent<PiecesModel,Double> event){
+        Double newPrice = event.getNewValue();
+        
+        if(event.getOldValue() != newPrice){
+            PiecesModel model = event.getRowValue();
+
+            model.setBuyPrice(newPrice);
+            model.update("id");
+        }
+    }
+
+    @FXML
     void initialize(){
         Label holder = new Label("Aucun résultat");
 
@@ -221,6 +251,8 @@ public class SearchSectionController extends Controller{
             this.resultManufacturerRef.setCellValueFactory(new PropertyValueFactory<>("externalRef") );
             this.resultPieceName.setCellValueFactory(new PropertyValueFactory<>("pieceName") );
             this.resultQuantity.setCellValueFactory(new PropertyValueFactory<>("quantity") );
+            this.resultSellPrice.setCellValueFactory(new PropertyValueFactory<>("sellPrice") );
+            this.resultBuyPrice.setCellValueFactory(new PropertyValueFactory<>("buyPrice") );
 
             this.resultInternalRef.setCellFactory(TextFieldTableCell.forTableColumn() );
             this.resultLocation.setCellFactory(TextFieldTableCell.forTableColumn() );
@@ -228,6 +260,8 @@ public class SearchSectionController extends Controller{
             this.resultManufacturerRef.setCellFactory(TextFieldTableCell.forTableColumn() );
             this.resultPieceName.setCellFactory(TextFieldTableCell.forTableColumn() );
             this.resultQuantity.setCellFactory(TextFieldTableCell.forTableColumn(new CustomIntConverter() ) );
+            this.resultSellPrice.setCellFactory(TextFieldTableCell.forTableColumn(new CustomDoubleConverter() ) );
+            this.resultBuyPrice.setCellFactory(TextFieldTableCell.forTableColumn(new CustomDoubleConverter() ) );
         }
         catch(Exception e){}
 
@@ -250,4 +284,21 @@ public class SearchSectionController extends Controller{
             return Integer.parseInt(string);
         }
     }
+
+     /**
+     * convetisseur double
+     */
+    static class CustomDoubleConverter extends StringConverter<Double>{
+
+        @Override
+        public String toString(Double object) {
+            return Double.toString(object);
+        }
+
+        @Override
+        public Double fromString(String string) {
+            return Double.parseDouble(string);
+        }
+    }
+
 }

@@ -38,6 +38,8 @@ public class PieceForm {
     private TextField location;
     private TextField internalRef;
     private TextField externalRef;
+    private Spinner<Double> sellPrice;
+    private Spinner<Double> buyPrice;
     
     private Spinner<Integer> quantity;
 
@@ -160,9 +162,19 @@ public class PieceForm {
             }
         });
 
-        HBox quantityLine = new HBox(20,new Label("Quantité"),this.quantity,deleteButton);
+        HBox quantityLine = new HBox(20,this.quantity,deleteButton);
         
         quantityLine.setAlignment(Pos.CENTER_LEFT);
+
+        this.sellPrice = new Spinner<>(0.0,1000000000.0,1.0);
+        this.buyPrice = new Spinner<>(0.0,1000000000.0,1.0);
+
+        this.sellPrice.setPromptText("Prix de vente");
+        this.buyPrice.setPromptText("Prix d'achat");
+        this.sellPrice.setTooltip(new Tooltip("Prix de vente") );
+        this.buyPrice.setTooltip(new Tooltip("Prix d'achat") );
+
+        HBox pricesLine = new HBox(20,this.sellPrice,this.buyPrice);
 
         this.form = new VBox(20,
             this.pieceName,
@@ -170,7 +182,10 @@ public class PieceForm {
             refLine,
             choiceRow,
             creatorNameField,
-            quantityLine
+            new Label("Quantité"),
+            quantityLine,
+            new Label("Prix de vente et prix d'achat"),
+            pricesLine
         );
 
         this.form.getStyleClass().add("new-form");
@@ -198,7 +213,7 @@ public class PieceForm {
                 !this.inLimit(location.length(),2,255)
             ) throw new Exception();
 
-            return new PiecesModel(this.quantity.getValue(),pieceName,this.creatorName,externalRef,internalRef,location);
+            return new PiecesModel(this.quantity.getValue(),pieceName,this.creatorName,externalRef,internalRef,location,this.buyPrice.getValue(),this.sellPrice.getValue() );
         }
         catch(Exception e){
             return null;

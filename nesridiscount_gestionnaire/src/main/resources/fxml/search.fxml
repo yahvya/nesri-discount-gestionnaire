@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="723.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nesridiscount.controllers.SearchSectionController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="723.0" prefWidth="1536.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nesridiscount.controllers.SearchSectionController">
    <center>
       <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <content>
@@ -113,9 +113,11 @@
                             <TableColumn fx:id="resultManufacturerRef" onEditCommit="#editEnterpriseRef" prefWidth="131.19994735717773" text="Ref fabriquant" />
                               <TableColumn fx:id="resultInternalRef" onEditCommit="#editInternalRef" prefWidth="124.80006408691406" text="Ref interne" />
                               <TableColumn fx:id="resultPieceName" minWidth="0.0" onEditCommit="#editPieceName" prefWidth="131.199951171875" text="Nom pièce" />
-                              <TableColumn fx:id="resultLocation" minWidth="0.0" onEditCommit="#editLocation" prefWidth="429.6000061035156" text="Emplacement" />
-                              <TableColumn fx:id="resultQuantity" minWidth="0.0" onEditCommit="#editQuantity" prefWidth="83.20001220703125" text="Quantité" />
-                              <TableColumn fx:id="resultManufacturerName" onEditCommit="#editEnterpriseName" prefWidth="260.7999267578125" text="Nom fabriquant" />
+                              <TableColumn fx:id="resultLocation" minWidth="0.0" onEditCommit="#editLocation" prefWidth="340.0" text="Emplacement" />
+                              <TableColumn fx:id="resultQuantity" minWidth="0.0" onEditCommit="#editQuantity" prefWidth="174.4000244140625" text="Quantité" />
+                              <TableColumn fx:id="resultManufacturerName" onEditCommit="#editEnterpriseName" prefWidth="224.7999267578125" text="Nom fabriquant" />
+                              <TableColumn fx:id="resultSellPrice" onEditCommit="#editSellPrice" prefWidth="131.2000732421875" text="P.Vente" />
+                              <TableColumn fx:id="resultBuyPrice" onEditCommit="#editBuyPrice" prefWidth="179.9998779296875" text="P.Achat" />
                           </columns>
                            <BorderPane.margin>
                               <Insets />
