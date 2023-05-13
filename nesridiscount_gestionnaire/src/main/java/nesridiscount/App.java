@@ -39,7 +39,7 @@ public class App extends Application {
         App.savedPages = new HashMap<>();
         App.setStage(primaryStage);
         App.appIcon = new Image(App.loadResource("/icons/favicon.png").toString() );
-
+        
         Parent parent = App.loadFXML("login");
 
         // chargement de la page d'accueil
