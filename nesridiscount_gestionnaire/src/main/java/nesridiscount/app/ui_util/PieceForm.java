@@ -14,6 +14,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
@@ -31,6 +32,11 @@ import nesridiscount.models.model.PiecesModel;
  * formulaire de création de pièce
  */
 public class PieceForm {
+    private static final int min = 0;
+    private static final int max = 1000000000;
+    private static final int initial = 1;
+    private static final double step = 0.1;
+
     private VBox container;
     private VBox form;
 
@@ -62,7 +68,19 @@ public class PieceForm {
         this.location = this.createTextField("Entrez l'emplacement de la pièce");
         this.internalRef = this.createTextField("Référence interne de la pièce");
         this.externalRef = this.createTextField("Référence fabriquant de la pièce");
-        this.quantity = new Spinner<Integer>(0,1000000,1);
+        this.quantity = new Spinner<Integer>(
+            PieceForm.min,
+            PieceForm.max,
+            PieceForm.initial
+        );
+
+        this.quantity.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(
+                PieceForm.min,
+                PieceForm.max,
+                PieceForm.initial
+            )
+        );
+        this.quantity.setEditable(true);
 
         HBox refLine = new HBox(20,this.internalRef,this.externalRef);
 
@@ -166,8 +184,21 @@ public class PieceForm {
         
         quantityLine.setAlignment(Pos.CENTER_LEFT);
 
-        this.sellPrice = new Spinner<>(0.0,1000000000.0,1.0);
-        this.buyPrice = new Spinner<>(0.0,1000000000.0,1.0);
+        this.sellPrice = new Spinner<>(
+            PieceForm.min,
+            PieceForm.max,
+            PieceForm.initial,
+            PieceForm.step
+        );
+        this.buyPrice = new Spinner<>(
+            PieceForm.min,
+            PieceForm.max,
+            PieceForm.initial,
+            PieceForm.step
+        );
+        
+        this.sellPrice.setEditable(true);
+        this.buyPrice.setEditable(true);
 
         this.sellPrice.setPromptText("Prix de vente");
         this.buyPrice.setPromptText("Prix d'achat");
