@@ -5,6 +5,7 @@ import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -182,6 +183,8 @@ public abstract class Model {
                 
                 if(toAddClass == String.class)
                     query.setString(index,(String) toAdd);
+                else if(toAddClass == Date.class)
+                    query.setDate(index,(Date) toAdd);
                 else if(toAddClass == Integer.class)
                     query.setInt(index,(Integer) toAdd);
                 else if(toAddClass == Long.class || toAddClass == Double.class)
@@ -215,9 +218,11 @@ public abstract class Model {
         try{
             Model model = toGet.getConstructor().newInstance();
 
-            ResultSet results = Model.getResults("select *,count(*) as countOfResults from " + model.tableName,conditions,model);
+            ResultSet results = Model.getResults("select * from " + model.tableName,conditions,model);
 
-            if(results.getInt("countOfResults") == 0) return null;
+            if(!results.next() ) return null;
+
+            results.first();
 
             model.columnsManagers.forEach((key,manager) -> manager.setFieldFrom(results) );
 
@@ -337,7 +342,13 @@ public abstract class Model {
      */
     private static Connection createConnection(){
         try{
-            return DriverManager.getConnection(Model.getDatabaseUrl() );
+            // dev
+            // return DriverManager.getConnection(Model.getDatabaseUrl() );
+
+            return DriverManager.getConnection(
+                "jdbc:mysql://aws.connect.psdb.cloud/nesridiscount?sslMode=VERIFY_IDENTITY",
+                "qi2x3kxwr9b4x5n189sz",
+                "pscale_pw_LbDGd1qMOb9UJLheG3ktJIWg3WRMSmpMtn5uCI7RPPR");               
         }
         catch(Exception e){
             return null;
@@ -355,6 +366,8 @@ public abstract class Model {
 
             if(toSet instanceof Integer)
                 query.setInt(paramIndex,(Integer) toSet);
+            if(toSet instanceof Date)
+                query.setDate(paramIndex,(Date) toSet);
             else if(toSet instanceof Long)
                 query.setLong(paramIndex,(Long) toSet);
             else if(toSet instanceof Double)

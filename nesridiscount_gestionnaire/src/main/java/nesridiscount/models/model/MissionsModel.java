@@ -67,7 +67,7 @@ public class MissionsModel extends Model{
         try{    
             MissionsModel utilModel = new MissionsModel();
 
-            String request = "select * from " + utilModel.tableName + " where strftime('%m',moment) = ? and strftime('%Y',moment) = ?"; 
+            String request = "select * from " + utilModel.tableName + " where month(moment) = ? and year(moment) = ?"; 
 
             Connection connection = Model.getConnection();
 

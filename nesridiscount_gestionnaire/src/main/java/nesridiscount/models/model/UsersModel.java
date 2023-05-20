@@ -37,13 +37,16 @@ public class UsersModel extends Model{
      * @return
      */
     public boolean checkPassword(String password){
-        return BCrypt.checkpw(password, this.password);
+        try{
+            return BCrypt.checkpw(password, this.password);
+        }
+        catch(Exception e){
+            return false;
+        }
     }
 
     public UsersModel setPassword(String password){
         this.password = BCrypt.hashpw(password,BCrypt.gensalt() );
-
-        System.out.println("motdepasse : " + this.password);
         
         return this;
     }

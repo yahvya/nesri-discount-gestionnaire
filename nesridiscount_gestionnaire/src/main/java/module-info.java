@@ -1,6 +1,6 @@
 module nesridiscount {
-    requires transitive json.simple;
     requires transitive javafx.controls;
+    requires transitive json.simple;
     requires tornadofx.controls;
     requires javafx.fxml;
     requires java.sql;

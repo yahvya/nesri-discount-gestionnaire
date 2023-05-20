@@ -13,10 +13,7 @@ import nesridiscount.app.session.Session;
 import nesridiscount.app.util.Action;
 import nesridiscount.controllers.Controller;
 
-/**
- * gestionnaire de pièces détachés nesri discount
- */
-public class App extends Application {
+public class App extends Application{
     private static Class<?> classLoader;
 
     private static Scene scene;
@@ -28,10 +25,6 @@ public class App extends Application {
     private static HashMap<Object,Action> toStopOnClose = new HashMap<>();
 
     private static Image appIcon;
-
-    public static void main(String[] args){
-        App.launch();
-    }
 
     @Override
     public void start(Stage primaryStage) throws Exception{

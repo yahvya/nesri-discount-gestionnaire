@@ -110,14 +110,14 @@
                         <TableView fx:id="resultArray" editable="true" minHeight="120.0" prefHeight="132.0" prefWidth="1210.0" BorderPane.alignment="CENTER">
                           <columns>
                             <TableColumn fx:id="resultId" editable="false" prefWidth="47.20001298189163" text="Id" />
-                            <TableColumn fx:id="resultManufacturerRef" onEditCommit="#editEnterpriseRef" prefWidth="131.19994735717773" text="Ref fabriquant" />
                               <TableColumn fx:id="resultInternalRef" onEditCommit="#editInternalRef" prefWidth="124.80006408691406" text="Ref interne" />
+                            <TableColumn fx:id="resultManufacturerRef" onEditCommit="#editEnterpriseRef" prefWidth="131.19994735717773" text="Ref fabriquant" />
+                              <TableColumn fx:id="resultQuantity" minWidth="0.0" onEditCommit="#editQuantity" prefWidth="174.4000244140625" text="Quantité" />
                               <TableColumn fx:id="resultPieceName" minWidth="0.0" onEditCommit="#editPieceName" prefWidth="131.199951171875" text="Nom pièce" />
                               <TableColumn fx:id="resultLocation" minWidth="0.0" onEditCommit="#editLocation" prefWidth="340.0" text="Emplacement" />
-                              <TableColumn fx:id="resultQuantity" minWidth="0.0" onEditCommit="#editQuantity" prefWidth="174.4000244140625" text="Quantité" />
                               <TableColumn fx:id="resultManufacturerName" onEditCommit="#editEnterpriseName" prefWidth="224.7999267578125" text="Nom fabriquant" />
-                              <TableColumn fx:id="resultSellPrice" onEditCommit="#editSellPrice" prefWidth="131.2000732421875" text="P.Vente" />
                               <TableColumn fx:id="resultBuyPrice" onEditCommit="#editBuyPrice" prefWidth="179.9998779296875" text="P.Achat" />
+                              <TableColumn fx:id="resultSellPrice" onEditCommit="#editSellPrice" prefWidth="131.2000732421875" text="P.Vente" />
                           </columns>
                            <BorderPane.margin>
                               <Insets />

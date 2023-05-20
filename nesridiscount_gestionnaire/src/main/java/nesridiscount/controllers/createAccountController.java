@@ -28,7 +28,7 @@ public class CreateAccountController {
 
     @FXML
     private RadioButton limitedChoice;
-
+    
     private ToggleGroup choiceButtons;
 
     @FXML   
