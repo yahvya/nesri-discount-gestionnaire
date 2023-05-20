@@ -7,9 +7,11 @@ import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
+
+import javax.swing.filechooser.FileSystemView;
+
 import org.json.simple.JSONObject;
 
-import nesridiscount.App;
 import nesridiscount.app.util.JsonWriter;
 import nesridiscount.models.model.Model;
 import nesridiscount.models.model.UsersModel;
@@ -67,7 +69,7 @@ public class Session {
 
         try{
             // sauvegarde du fichier
-            JsonWriter.writeObject(saveObject,App.loadResource("/documents/").toURI().toString() + Session.SESSION_SAVE_FILE);
+            JsonWriter.writeObject(saveObject,Session.getRoot() + Session.SESSION_SAVE_FILE);
         }
         catch(Exception e){}
     }
@@ -78,7 +80,7 @@ public class Session {
      */
     public static boolean loadSession(){
         try{
-            JSONObject sessionObject = JsonWriter.readObject(App.loadResource("/documents/" + Session.SESSION_SAVE_FILE).toURI().toString() );
+            JSONObject sessionObject = JsonWriter.readObject(Session.getRoot() + Session.SESSION_SAVE_FILE);
             
             Timestamp loginTime = Timestamp.valueOf((String) sessionObject.get("loginTime") );
 
@@ -119,7 +121,7 @@ public class Session {
      */
     public static boolean loggout(){
         try{
-            return new File(new URI(App.loadResource("/documents/" + Session.SESSION_SAVE_FILE).toURI().toString() ) ).delete();
+            return new File(Session.getRoot() + Session.SESSION_SAVE_FILE).delete();
         }
         catch(Exception e){
             return false;
@@ -156,6 +158,18 @@ public class Session {
      */
     public static Role getRole(){
         return Session.role;
+    }
+
+    /**
+     * 
+     * @return le chemin root
+     */
+    private static String getRoot(){
+        String path = FileSystemView.getFileSystemView().getDefaultDirectory().getAbsolutePath();
+
+        if(!path.endsWith("/") && !path.endsWith("\\") ) path += "\\";
+
+        return path;
     }
 
     public enum Role{

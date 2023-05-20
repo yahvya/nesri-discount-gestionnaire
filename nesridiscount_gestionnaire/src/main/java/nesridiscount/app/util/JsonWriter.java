@@ -24,7 +24,7 @@ public class JsonWriter {
      */
     public static JSONObject readObject(String link){
         try{
-            String content = Files.readString(Path.of(new URI(link) ) );
+            String content = Files.readString(Path.of(link) );
 
             // recherche et remplacement des chaines
             Matcher matches = Pattern.compile("\"[^\"]*\"").matcher(content);
@@ -54,7 +54,7 @@ public class JsonWriter {
         FileWriter writer = null;
         
         try{
-            writer = new FileWriter(new File(new URI(link) ) );
+            writer = new FileWriter(new File(link) );
 
             String jsonString = jsonData.toJSONString();
 
