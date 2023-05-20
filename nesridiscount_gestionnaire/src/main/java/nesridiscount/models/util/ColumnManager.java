@@ -1,6 +1,7 @@
 package nesridiscount.models.util;
 
 import java.lang.reflect.Field;
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 
 import nesridiscount.models.model.Model;
@@ -36,7 +37,12 @@ public class ColumnManager{
      */
     public boolean setFieldFrom(ResultSet data){
         try{
-            this.linkedField.set(this.linkedModel,data.getObject(this.columnAttribute.linkedCol() ) );
+            Object obj = data.getObject(this.columnAttribute.linkedCol() );
+
+            if(!(obj instanceof BigDecimal) )
+                this.linkedField.set(this.linkedModel,obj);
+            else 
+                this.linkedField.setDouble(this.linkedModel,((BigDecimal) obj).doubleValue() );
 
             return true;
         }
