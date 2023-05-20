@@ -244,6 +244,7 @@ public class PieceForm {
                 !this.inLimit(location.length(),2,255)
             ) throw new Exception();
 
+            
             return new PiecesModel(this.quantity.getValue(),pieceName,this.creatorName,externalRef,internalRef,location,this.buyPrice.getValue(),this.sellPrice.getValue() );
         }
         catch(Exception e){

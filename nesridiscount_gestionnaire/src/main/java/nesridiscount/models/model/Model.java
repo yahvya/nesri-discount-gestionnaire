@@ -185,9 +185,11 @@ public abstract class Model {
                     query.setString(index,(String) toAdd);
                 else if(toAddClass == Date.class)
                     query.setDate(index,(Date) toAdd);
+                else if(toAddClass == Double.class)
+                    query.setDouble(index,(Double) toAdd);
                 else if(toAddClass == Integer.class)
                     query.setInt(index,(Integer) toAdd);
-                else if(toAddClass == Long.class || toAddClass == Double.class)
+                else if(toAddClass == Long.class)
                     query.setBigDecimal(index,BigDecimal.valueOf((Double) toAdd) );
                 else 
                     continue;
